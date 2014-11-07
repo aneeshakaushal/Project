@@ -1,0 +1,15 @@
+table {
+	
+	table-layout: fixed;
+	width:560px;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+td{
+	 word-wrap:break-word;
+	 border: 1px solid black;
+}
+th{
+	 word-wrap:break-word;
+	 border: 1px solid black;
+}

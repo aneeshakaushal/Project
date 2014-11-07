@@ -1,0 +1,119 @@
+.tab-panels ul li{
+	list-style-type: none;
+	display: inline-block;
+	background: blue;
+	margin : 0;
+	padding: 3px 10px;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-weight: bolder;
+	cursor: pointer;
+}
+.tab-panels ul{
+	margin: 0;
+	padding: 0;
+}
+.tab-panels ul li:hover{
+	color:#fff;
+	background: #4682B4;
+}
+
+.tab-panels ul li.active{
+	color: #fff;
+	background: #00BFFF;
+}
+
+.tab-panels .panel{
+	display:none;
+	background: #F5F5F5	;
+	padding: 30px;
+	border-radius: 0 10px 10px 10px;
+	width: 500px;
+}
+
+.tab-panels .panel.active{
+	display: block;
+}
+
+#save{
+	position:relative;
+    bottom: 0;
+    right: 0;
+}
+
+#header {
+  position : fixed;
+  width : 100%;
+  height :  50px;
+  top : 0;
+  right : 0;
+  bottom : auto;
+  left : 0;  
+  background-color: blue;
+
+
+}
+#footer {
+  position : fixed;
+  width : 100%;
+  height :  20px;
+  top : auto;
+  right : 0;
+  bottom : 0;
+  left : 0;  
+  background-color: blue;
+
+
+}
+.logo{
+	margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 160px;
+
+}
+
+.right{	
+	right: auto;
+}
+
+
+#leftnavigation {
+    position : fixed;
+    height : auto;
+    top : 10%;
+    left : 0;
+    width : 150px;
+    margin : 0px 0px 0px 10px;
+    color : #000000;
+    padding : 3px;
+    overflow : auto;
+}
+
+/*#content {
+  position : fixed;
+  top : 10%;
+  bottom : 100px;
+  margin : 0px 0px 0px 165px;
+  width : auto;
+  height : auto;
+  padding-left : 5px;
+  padding-right : 12px;
+  color : #000000;
+  border-left : 2px solid #cccccc;
+  overflow : auto;
+}*/
+
+iframe {
+  position : fixed;
+  top : 10%;
+  bottom : 100px;
+  margin : 0px 0px 0px 300px;
+  width : 1200PX;
+  height : 700PX;
+ 
+  color : #000000;
+  border-left : 2px solid #cccccc;
+  overflow : auto;
+}
+
