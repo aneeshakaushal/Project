@@ -66,17 +66,26 @@
 
 }
 .logo{
-	margin-left: auto;
-    margin-right: auto;
-    display: block;
-    width: 160px;
+	
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 160px;
 
 }
 
-.right{	
-	right: auto;
+.alignright { 
+  margin-top: -44px;
+  float: right; 
+  
 }
+.alignleft { float: left; }
 
+#Hide,#logout
+{
+  background: #33CCFF;
+  color: blue;
+}
 
 #leftnavigation {
     position : fixed;
@@ -89,29 +98,16 @@
     padding : 3px;
     overflow : auto;
 }
-
-/*#content {
-  position : fixed;
-  top : 10%;
-  bottom : 100px;
-  margin : 0px 0px 0px 165px;
-  width : auto;
-  height : auto;
+#username{
+  color: #ffffff;
+  font-size: 15px;
+  font-style: italic;
+}
+#content {
+ 
+  margin : 100px 0px 100px 165px;
   padding-left : 5px;
   padding-right : 12px;
-  color : #000000;
-  border-left : 2px solid #cccccc;
-  overflow : auto;
-}*/
-
-iframe {
-  position : fixed;
-  top : 10%;
-  bottom : 100px;
-  margin : 0px 0px 0px 300px;
-  width : 1200PX;
-  height : 700PX;
- 
   color : #000000;
   border-left : 2px solid #cccccc;
   overflow : auto;
