@@ -1,10 +1,17 @@
+body{
+  margin: 0 auto;
+  top: 0px;
+  background: url(../images/bg.png);
+  font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+}
+
+
 .tab-panels ul li{
 	list-style-type: none;
 	display: inline-block;
-	background: blue;
+	background: rgba(82,94,141,0.4);
 	margin : 0;
-	padding: 3px 10px;
-	border-radius: 10px 10px 0 0;
+	padding: 3px 10px;	
 	color: #fff;
 	font-weight: bolder;
 	cursor: pointer;
@@ -15,20 +22,20 @@
 }
 .tab-panels ul li:hover{
 	color:#fff;
-	background: #4682B4;
+	background: rgba(0,0,0,0.6); 
 }
 
 .tab-panels ul li.active{
 	color: #fff;
-	background: #00BFFF;
+	background: rgba(0,0,0,0.6); 
 }
 
 .tab-panels .panel{
 	display:none;
-	background: #F5F5F5	;
+ background-color:rgba(255,62,10,0.1);;
 	padding: 30px;
-	border-radius: 0 10px 10px 10px;
-	width: 500px;
+	
+	width: 560px;
 }
 
 .tab-panels .panel.active{
@@ -41,38 +48,10 @@
     right: 0;
 }
 
-#header {
-  position : fixed;
-  width : 100%;
-  height :  50px;
-  top : 0;
-  right : 0;
-  bottom : auto;
-  left : 0;  
-  background-color: blue;
 
 
-}
-#footer {
-  position : fixed;
-  width : 100%;
-  height :  20px;
-  top : auto;
-  right : 0;
-  bottom : 0;
-  left : 0;  
-  background-color: blue;
 
 
-}
-.logo{
-	
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  width: 160px;
-
-}
 
 .alignright { 
   margin-top: -44px;
@@ -87,17 +66,7 @@
   color: blue;
 }
 
-#leftnavigation {
-    position : fixed;
-    height : auto;
-    top : 10%;
-    left : 0;
-    width : 150px;
-    margin : 0px 0px 0px 10px;
-    color : #000000;
-    padding : 3px;
-    overflow : auto;
-}
+
 #username{
   color: #ffffff;
   font-size: 15px;
@@ -105,11 +74,216 @@
 }
 #content {
  
-  margin : 100px 0px 100px 165px;
+  margin : 100px 0px 100px 250px;
   padding-left : 5px;
   padding-right : 12px;
   color : #000000;
-  border-left : 2px solid #cccccc;
+
   overflow : auto;
 }
 
+/*header & header buttons*/
+
+.lines { 
+    background-color: transparent;
+    border-bottom: 12px double #006699; 
+    border-top: 4px solid #006699; 
+    content:"";
+    height: 5px; 
+    width:30px;  
+    margin-left: 10px;
+     
+    display: block; 
+    margin-top: 20px;
+    margin-bottom: 5px;
+
+  
+}
+.lines:hover {
+  cursor: hand;
+  border-bottom: 12px double white; 
+  border-top: 4px solid white;
+  transition: .5s ease; 
+}
+
+
+.btn {
+  display: block;
+  border-radius: 2px;
+  border: none;
+  height: 45px;
+  padding: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;  
+  
+}
+
+.sm {
+  width: 6%;
+  background-color: transparent;
+  border: 0px;
+}
+
+.ghost {
+  background-color: transparent;
+  color: #006699;
+  
+  font-weight: bolder;
+  font-size: 15px;
+ 
+}
+.ghost:hover {
+  background-color: #006699;
+  color: white;
+  transition: .5s ease;
+  
+}
+
+
+.right{
+  float: right;
+
+}
+.header{  
+  z-index: 1;
+   position: fixed;
+   width :100%;
+   top: 0px;
+   height: 50px;
+  background-color: #282828;  
+  --webkit-box-shadow: 2px 10px 5px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 10px 5px -5px rgba(0,0,0,0.75);
+  box-shadow: 2px 10px 5px -5px rgba(0,0,0,0.75); 
+}
+
+#logo{
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  width : 250px;
+
+
+}
+.top{
+  margin-top: -110px;
+}
+
+/*form css*/
+
+form{ 
+  border:2px dashed;
+  padding: 20px;
+   font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+
+}
+
+
+form .box
+{background: transparent url("../images/bg-input-std-left.png") no-repeat scroll right top;
+width:100%;
+border:5px solid #2676a2;
+border-radius:3px;
+-webkit-border-radius:3px;
+-moz-border-radius:3px;
+ padding: 5px 7px 5px 5px;
+}
+
+::-webkit-input-placeholder {
+    color: black;   
+    font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+}
+:-moz-placeholder {
+    color: black;    
+    font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+}
+:-ms-input-placeholder {
+    color: black;    
+    font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+}
+input[type="text"]
+{
+    color: black;    
+    font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+}
+
+.btn2 {  
+  
+  background: url(../images/gr-yellow.png);
+  height: 45px;
+  width: 130px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+ 
+  border:5px solid #2676a2;
+  border-radius:3px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  padding: 5px 7px 5px 5px;
+  color:  #2676a2;
+  font-weight: bolder;
+  
+  font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;  
+}
+
+.btn2:hover {
+background: #dad671 ;
+cursor: pointer;
+}
+select
+{       
+    font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+}
+input[type="checkbox"]{
+  float: right;   
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/*footer*/
+
+.footer {
+  position : fixed;
+  width : 100%;
+  height :  20px;
+  top : auto;
+  right : 0;
+  bottom : 0;
+  left : 0;  
+  background-color: #333;
+  z-index: -1;
+}
+
+
+
+.footermenu {
+  margin-right: 30PX;
+  background: #333;  
+  height: 120px;
+  width: 150px;
+  position :fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
+.footermenu li {
+  font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footermenu a {
+  background: #333;  
+  color: #ccc;
+  display: block;
+  margin: 0;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.footermenu li a:hover,
+.footermenu li a:active {
+  background-color: #006699;
+  color: #fff;  
+}*/

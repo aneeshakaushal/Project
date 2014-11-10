@@ -3,78 +3,87 @@
 	<title>Project</title>
 	<link rel="stylesheet" type="text/css" href="css/layout.css">
 	<link rel="stylesheet" type="text/css" href="css/table.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
 </head>
 <body>
-<div id="header">
-<div id="header">
-	<button class="alignleft" id="Hide">HIDE</button>
-	<img src="amadeus-logo-hi.jpg" class="logo"> 
-		<div class="alignright" id="username">
-			Aneesha Kaushal
-		<button id="logout">LOGOUT</button>
-	</div>
+
+<div class="header"> 
+
+<button class="btn sm ghost right">Logout</button>	
+<button class="btn sm ghost right">Home</button>
+<div class="lines"></div>
+
+<img class="top" id="logo" src="images/Amadeus-2.gif"></image>	
 </div>
-</div>
+
+
 <div id="leftnavigation">
-	<ul>
-		
-		<li><a href="#">Subscribers</a></li>
-		<li><a href="#" >Users</a></li>
-		<li><a href="#">Services</a></li></ul>
+	<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='#'><span>Subscriber</span></a></li>
+   <li><a href='#'><span>Users</span></a></li>
+   <li><a href='#'><span>Services</span></a></li>
+   
+</ul>
+</div>
 </div>
 
 <div id="content">
 	<div id="subscriber">
+		<h1>Subscriber</h1>
 	<div class="tab-panels">
 		<ul class="tabs">
-			<li >Details</li>
-			<li class="active">Subscription</li>
+			<li class="active">Details</li>
+			<li >Subscription</li>
 		</ul>
-		<div id="details" class="panel">
+		<div id="details" class="panel active">
+			
 			<div id="subscriber_form">
 				<form action="#" id="form1">
-				Subscriber Name : <input type="Text" placeholder="Enter name"></br></br>
-				<input id="save" type="submit" value="SAVE">
+				<input class="box" type="Text" placeholder="Subscriber Name :"></br></br>
+				<input class="btn2"id="save" type="submit" value="  SAVE   ">
 				</form>
 			</div>
 		</div>
 		<div id="subscri" class="panel active">
-			<div id="subscription_form">
-				<form action="#" id="form1">
+			<div id="subscription_form" >
+				<form action="#" id="form1" >
 				Service : 
-				<select>
+				<select class="box" >
 				<option>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.
 				</option>
 				<option>Depositing a voice message-Re 0.75 </option>
 				</select>
 				</br></br>
-				Start Date :<input type="text" id="datepicker"></p><br><br> 
-				End Date : <input type="text" id="datepicker2"></p> <br><br>  
-				<input id="save" type="submit" value="SAVE">
+				<input class="box" type="Text" placeholder="Start Date :"></p>
+				<input class="box" type="Text" id="datepicker2" placeholder="End Date :"></p> 
+				<input class="btn2" id="save" type="submit" value="SAVE">
 				</form>
 			</div>
 			</br>
 			<div id="subscription_table">
-				<button id="add">ADD</button>
+				<button class="add" id="add">ADD </button>
 				<table>
 					<tr>
 						<th>Service Name</th>
 						<th>Start Date</th>
-					<th>End Date</th>
+						<th>End Date</th>
 					</tr>
 					<tr>
 						<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
 						<td>4/12/2014</td>
 						<td>5/12/2015</td>
+						<td class="delete"><img width="30px" src="images/delete.png"></td>
 					</tr>
+
 				</table>
 			</div>		
 		</div>
 		</br>
 	</div>
 <div id="subscriber_table">
-<button id="add">ADD</button>
+<button class="add" id="add">ADD</button>
 <table>
 <tr>
 <th>Name</th>
@@ -85,11 +94,13 @@
 	<td>xyz</td>
 	<td>4</td>
 	<td>2</td>
+	<td class="delete"><img width="30px" src="images/delete.png"></td>
 </tr>
 </table>
 </div>
 </div>
 	<div id="users">
+		<h1>Users</h1>
 		<div class="tab-panels">
 		<ul class="tabs">
 			<li class="active">Details</li>		
@@ -97,20 +108,20 @@
 		<div id="details" class="panel active">
 		<div id="user_form">
 			<form action="#" id="form2">
-			User Name : <input type="Text" placeholder="Enter name"></br></br>
-			Subscriber : <select>
+			<input class="box" type="Text" placeholder="Enter name"></br></br>
+			Subscriber : <select class="box">
 				<option>xyz</option>
 				<option>abc</option>
 			</select></br></br>
-			Admin : <input type="checkbox"></br></br>
-			<input id="save" type="submit" value="SAVE">
+			Admin : <input  type="checkbox"></br> </br>
+			<input class="btn2"id="save" type="submit" value="SAVE">
 			</form>
 		</div>
 		</div>	
 	</div>
 </br>
 <div id="user_table">
-<button id="add">ADD</button>
+<button class="add" id="add">ADD</button>
 <table>
 <tr>
 <th>Name</th>
@@ -121,11 +132,14 @@
 	<td>John</td>
 	<td>xyz</td>
 	<td>Yes</td>
+	<td class="delete"><img width="30px" src="images/delete.png"></td>
+
 </tr>
 </table>
 </div>
 </div>
 	<div id="services">
+		<h1>Services</h1>
 		<div class="tab-panels">
 	<ul class="tabs">
 		<li class="active">Details</li>		
@@ -133,13 +147,13 @@
 	<div id="details" class="panel active">
 		<div id="service_form">
 			<form action="#" id="form3">
-			Service Name : <input type="Text" placeholder="Enter name"></br></br>
-			Product : <select>
+			<input class="box"type="Text" placeholder="Service Name"></br></br>
+			Product : <select class="box">
 				<option>Calls</option>
 				<option>SMS</option>
 				<option>Data</option>
 			</select></br></br>
-			Market : <select>
+			Market : <select class="box">
 			<option value='Select State'>Select State</option>
 <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
 <option value='Andhra Pradesh'>Andhra Pradesh</option>
@@ -180,14 +194,14 @@
 </select></br></br>
 	
 			
-			<input id="save" type="submit" value="SAVE">
+			<input class="btn2" id="save" type="submit" value="SAVE">
 			</form>
 		</div>
 	</div>	
 </div>
 </br>
 <div id="user_table">
-<button id="add">ADD</button>
+<button class="add" id="add">ADD</button>
 <table>
 <tr>
 <th>Service Name</th>
@@ -197,12 +211,21 @@
 <tr>
 	<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
 	<td>SMS</td>
+	<td class="delete"><img width="30px" src="images/delete.png"></td>
 	
 </tr>
 </table>
 	</div>
 </div>	
-<div id="footer"></div>
+
+<div class="footermenu">
+<ul>
+   <li class='active'><a href='#'><span>Contact Us</span></a></li>
+   <li><a href='#'><span>About</span></a></li> 
+<div class="footer"></div>
+</ul>
+
+
 
  </body>
 </html>

@@ -2,14 +2,52 @@ table {
 	
 	table-layout: fixed;
 	width:560px;
-	border: 1px solid black;
-	border-radius: 3px;
+	
+	
 }
 td{
+
+	 padding: 5px;
 	 word-wrap:break-word;
-	 border: 1px solid black;
+	 background-color: rgba(0,0,0,.1);
 }
 th{
+	padding: 10px;
+	 color: white;
 	 word-wrap:break-word;
-	 border: 1px solid black;
+	 background-color: rgba(0,0,0,.6);
+}
+td:hover{
+ cursor: pointer;
+ background-color: rgba(255,255,255,.7);
+}
+
+.add{  
+  
+  background: url(../images/gr-yellow.png);
+  
+  height: 40px;
+  width: 60px;
+  
+  border:5px solid #2676a2;
+
+  border-radius:50px;
+  -webkit-border-radius:50px;
+  -moz-border-radius:50px;
+  color:  #2676a2;
+  font-weight: bolder;
+ font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif
+}
+
+.add:hover{
+	cursor: pointer;
+	background: #dad671 ;
+}
+
+.delete{
+	float:none;	
+	background-color: transparent;
+}
+.delete:hover{	
+	background-color: transparent;
 }
