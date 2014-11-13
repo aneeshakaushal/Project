@@ -4,23 +4,20 @@ body{
 #cssmenu {
   background: #333;
   list-style: none;
-  padding-left: 0px;
   height: 1000px;
   width: 200px;
-  margin-top: -50px;
   position :fixed;
   
 }
 #cssmenu li {
   font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
   margin: 0;
-  padding: 0;
   list-style: none;
 }
 #cssmenu a {
-  background: #333;
+  
   border-bottom: 1px solid #393939;
-  color: #ccc;
+ 
   display: block;
   margin: 0;
   padding: 19px 12px;
@@ -28,20 +25,9 @@ body{
   font-weight: normal;
 }
 
-#cssmenu li a:hover,
-#cssmenu li a:active {
+#cssmenu li a:hover {
   background: #006699 url("images/hover.gif") left center no-repeat;
   color: #fff;
   padding: 19px 12px;
-}
-/*#leftnavigation {
-    position : fixed;
-    height : auto;
-    top : 10%;
-    left : 0;
-    width : 150px;
-    margin : 0px 0px 0px 10px;
-    color : #000000;
-    padding : 3px;
-    overflow : auto;
-}*/
+ }
+

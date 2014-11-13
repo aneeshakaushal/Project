@@ -1,232 +1,256 @@
 <html>
 <head>
 	<title>Project</title>
+
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/layout.css">
 	<link rel="stylesheet" type="text/css" href="css/table.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
-
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<script type="text/javascript" src="js/respond.min.js"></script>
 </head>
-<body>
-
-<div class="header"> 
-
-<button class="btn sm ghost right">Logout</button>	
-<button class="btn sm ghost right">Home</button>
-<div class="lines"></div>
-
-<img class="top" id="logo" src="images/Amadeus-2.gif"></image>	
-</div>
+	<body>
+<div class="container">
+	<!-- Header with bootstrap navbar -->
 
 
-<div id="leftnavigation">
-	<div id='cssmenu'>
-<ul>
-   <li class='active'><a href='#'><span>Subscriber</span></a></li>
-   <li><a href='#'><span>Users</span></a></li>
-   <li><a href='#'><span>Services</span></a></li>
-   
-</ul>
-</div>
-</div>
 
-<div id="content">
-	<div id="subscriber">
-		<h1>Subscriber</h1>
-	<div class="tab-panels">
-		<ul class="tabs">
-			<li class="active">Details</li>
-			<li >Subscription</li>
-		</ul>
-		<div id="details" class="panel active">
+	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="hidden-xs"><img id="logo" src="images/Amadeus-2.gif"></img></div>
+		<div class="navbar-header">
+			<div class=" lines col-xs-6 "><span class="glyphicon glyphicon-arrow-right"></span></div>
+
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
 			
-			<div id="subscriber_form">
-				<form action="#" id="form1">
-				<input class="box" type="Text" placeholder="Subscriber Name :"></br></br>
-				<input class="btn2"id="save" type="submit" value="  SAVE   ">
-				</form>
-			</div>
 		</div>
-		<div id="subscri" class="panel active">
-			<div id="subscription_form" >
-				<form action="#" id="form1" >
-				Service : 
-				<select class="box" >
-				<option>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.
-				</option>
-				<option>Depositing a voice message-Re 0.75 </option>
-				</select>
-				</br></br>
-				<input class="box" type="Text" placeholder="Start Date :"></p>
-				<input class="box" type="Text" id="datepicker2" placeholder="End Date :"></p> 
-				<input class="btn2" id="save" type="submit" value="SAVE">
-				</form>
+		<div class="navbar-collapse collapse" id="collapse">
+			<ul class="nav navbar-nav">
+				<li class="ghost "><A HREF="#">Home</A></li>
+				<li class="ghost "><A HREF="#">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="row">
+		
+
+	<article class="col-lg-9 col-sm-7 col-lg-push-3 col-sm-push-4">
+
+		<div id="subscriber">
+			<h1>Subscriber</h1>
+		<div class="tab-panels">
+			<ul class="nav tabs">  <!-- tabs -->
+				<li class="active"><A HREF="#details" data-toggle="tab">Details</A></li>
+				<li ><A HREF="#subscri" data-toggle="tab">Subscription </A></li>
+			</ul>
+			<div class="tab-content">
+					<div id="details" class="tab-pane fade active in panel">	<!-- panel -->			
+						<div id="subscriber_form">
+							<form action="#" id="form1">
+							<input class="box" type="Text" placeholder="Subscriber Name :"></br></br>
+							<input class="btn2"id="save" type="submit" value="  SAVE   ">
+							</form>
+						</div>
+					</div>
+				<div id="subscri" class="tab-pane fade panel">
+					<div id="subscription_form" >
+						<form action="#" id="form1" >
+						Service : 
+						<select class="box" >
+						<option>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.
+						</option>
+						<option>Depositing a voice message-Re 0.75 </option>
+						</select>
+						</br></br>
+						<input class="box" type="Text" placeholder="Start Date :"></p>
+						<input class="box" type="Text" id="datepicker2" placeholder="End Date :"></p> 
+						<input class="btn2" id="save" type="submit" value="SAVE">
+						</form>
+					</div>
+					</br>
+					<div id="subscription_table">
+						<button class="add" id="add">ADD </button>
+						<table class="table table-bordered">
+							<tr>
+								<th>Service Name</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								
+							</tr>
+							<tr>
+								<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
+								<td>4/12/2014</td>
+								<td>5/12/2015</td>
+								<td class="delete"><img width="30px" src="images/delete.png"></td>
+							</tr>
+
+						</table>
+					</div>		
+				</div>
 			</div>
 			</br>
-			<div id="subscription_table">
-				<button class="add" id="add">ADD </button>
-				<table>
-					<tr>
-						<th>Service Name</th>
-						<th>Start Date</th>
-						<th>End Date</th>
-					</tr>
-					<tr>
-						<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
-						<td>4/12/2014</td>
-						<td>5/12/2015</td>
-						<td class="delete"><img width="30px" src="images/delete.png"></td>
-					</tr>
-
-				</table>
-			</div>		
 		</div>
-		</br>
+	<div id="subscriber_table">
+	<button class="add" id="add">ADD</button>
+	<table class="table table-bordered">
+	<tr>
+	<th>Name</th>
+	<th>Number of Users</th>
+	<th>Number of Subscriptions</th>
+	</tr>
+	<tr>
+		<td>xyz</td>
+		<td>4</td>
+		<td>2</td>
+		<td class="delete"><img width="30px" src="images/delete.png"></td>
+	</tr>
+	</table>
 	</div>
-<div id="subscriber_table">
-<button class="add" id="add">ADD</button>
-<table>
-<tr>
-<th>Name</th>
-<th>Number of Users</th>
-<th>Number of Subscriptions</th>
-</tr>
-<tr>
-	<td>xyz</td>
-	<td>4</td>
-	<td>2</td>
-	<td class="delete"><img width="30px" src="images/delete.png"></td>
-</tr>
-</table>
-</div>
-</div>
-	<div id="users">
-		<h1>Users</h1>
-		<div class="tab-panels">
+	</div>
+		<div id="users">
+			<h1>Users</h1>
+			<div class="tab-panels">
+			<ul class="tabs">
+				<li class="active">Details</li>		
+			</ul>
+			<div id="details" class="panel active">
+			<div id="user_form">
+				<form action="#" id="form2">
+				<input class="box" type="Text" placeholder="Enter name"></br></br>
+				Subscriber : <select class="box">
+					<option>xyz</option>
+					<option>abc</option>
+				</select></br></br>
+				Admin : <input  type="checkbox"></br> </br>
+				<input class="btn2"id="save" type="submit" value="SAVE">
+				</form>
+			</div>
+			</div>	
+		</div>
+	</br>
+	<div id="user_table">
+	<button class="add" id="add">ADD</button>
+	<table class="table table-bordered table-responsive">
+	<tr>
+	<th>Name</th>
+	<th>Subscriber Name</th>
+	<th>Admin</th>
+	</tr>
+	<tr>
+		<td>John</td>
+		<td>xyz</td>
+		<td>Yes</td>
+		<td class="delete"><img width="30px" src="images/delete.png"></td>
+
+	</tr>
+	</table>
+	</div>
+	</div>
+		<div id="services">
+			<h1>Services</h1>
+			<div class="tab-panels">
 		<ul class="tabs">
 			<li class="active">Details</li>		
 		</ul>
 		<div id="details" class="panel active">
-		<div id="user_form">
-			<form action="#" id="form2">
-			<input class="box" type="Text" placeholder="Enter name"></br></br>
-			Subscriber : <select class="box">
-				<option>xyz</option>
-				<option>abc</option>
-			</select></br></br>
-			Admin : <input  type="checkbox"></br> </br>
-			<input class="btn2"id="save" type="submit" value="SAVE">
-			</form>
-		</div>
+			<div id="service_form">
+				<form action="#" id="form3">
+				<input class="box"type="Text" placeholder="Service Name"></br></br>
+				Product : <select class="box">
+					<option>Calls</option>
+					<option>SMS</option>
+					<option>Data</option>
+				</select></br></br>
+				Market : <select class="box">
+				<option value='Select State'>Select State</option>
+	<option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
+	<option value='Andhra Pradesh'>Andhra Pradesh</option>
+	<option value='Arunachal Pradesh'>Arunachal Pradesh</option>
+	<option value='Assam'>Assam</option>
+	<option value='Bihar'>Bihar</option>
+	<option value='Chandigarh'>Chandigarh</option>
+	<option value='Chhattisgarh'>Chhattisgarh</option>
+	<option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
+	<option value='Daman and Diu'>Daman and Diu</option>
+	<option value='Delhi'>Delhi</option>
+	<option value='Goa'>Goa</option>
+	<option value='Gujarat'>Gujarat</option>
+	<option value='Haryana'>Haryana</option>
+	<option value='Himachal Pradesh'>Himachal Pradesh</option>
+	<option value='Jammu and Kashmir'>Jammu and Kashmir</option>
+	<option value='Jharkhand'>Jharkhand</option>
+	<option value='Karnataka'>Karnataka</option>
+	<option value='Kerala'>Kerala</option>
+	<option value='Lakshadweep'>Lakshadweep</option>
+	<option value='Madhya Pradesh'>Madhya Pradesh</option>
+	<option value='Maharashtra'>Maharashtra</option>
+	<option value='Manipur'>Manipur</option>
+	<option value='Meghalaya'>Meghalaya</option>
+	<option value='Mizoram'>Mizoram</option>
+	<option value='Nagaland'>Nagaland</option>
+	<option value='Odisha'>Odisha</option>
+	<option value='Puducherry'>Puducherry</option>
+	<option value='Punjab'>Punjab</option>
+	<option value='Rajasthan'>Rajasthan</option>
+	<option value='Sikkim'>Sikkim</option>
+	<option value='Tamil Nadu'>Tamil Nadu</option>
+	<option value='Telengana'>Telengana</option>
+	<option value='Tripura'>Tripura</option>
+	<option value='Uttar Pradesh'>Uttar Pradesh</option>
+	<option value='Uttarakhand'>Uttarakhand</option>
+	<option value='West Bengal'>West Bengal</option>
+	</select></br></br>
+		
+				
+				<input class="btn2" id="save" type="submit" value="SAVE">
+				</form>
+			</div>
 		</div>	
 	</div>
-</br>
-<div id="user_table">
-<button class="add" id="add">ADD</button>
-<table>
-<tr>
-<th>Name</th>
-<th>Subscriber Name</th>
-<th>Admin</th>
-</tr>
-<tr>
-	<td>John</td>
-	<td>xyz</td>
-	<td>Yes</td>
-	<td class="delete"><img width="30px" src="images/delete.png"></td>
+	</br>
+	<div id="user_table">
+	<button class="add" id="add">ADD</button>
+	<table class="table table-bordered">
+	<tr>
+	<th>Service Name</th>
+	<th>Product Name</th>
 
-</tr>
-</table>
-</div>
-</div>
-	<div id="services">
-		<h1>Services</h1>
-		<div class="tab-panels">
-	<ul class="tabs">
-		<li class="active">Details</li>		
-	</ul>
-	<div id="details" class="panel active">
-		<div id="service_form">
-			<form action="#" id="form3">
-			<input class="box"type="Text" placeholder="Service Name"></br></br>
-			Product : <select class="box">
-				<option>Calls</option>
-				<option>SMS</option>
-				<option>Data</option>
-			</select></br></br>
-			Market : <select class="box">
-			<option value='Select State'>Select State</option>
-<option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
-<option value='Andhra Pradesh'>Andhra Pradesh</option>
-<option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-<option value='Assam'>Assam</option>
-<option value='Bihar'>Bihar</option>
-<option value='Chandigarh'>Chandigarh</option>
-<option value='Chhattisgarh'>Chhattisgarh</option>
-<option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
-<option value='Daman and Diu'>Daman and Diu</option>
-<option value='Delhi'>Delhi</option>
-<option value='Goa'>Goa</option>
-<option value='Gujarat'>Gujarat</option>
-<option value='Haryana'>Haryana</option>
-<option value='Himachal Pradesh'>Himachal Pradesh</option>
-<option value='Jammu and Kashmir'>Jammu and Kashmir</option>
-<option value='Jharkhand'>Jharkhand</option>
-<option value='Karnataka'>Karnataka</option>
-<option value='Kerala'>Kerala</option>
-<option value='Lakshadweep'>Lakshadweep</option>
-<option value='Madhya Pradesh'>Madhya Pradesh</option>
-<option value='Maharashtra'>Maharashtra</option>
-<option value='Manipur'>Manipur</option>
-<option value='Meghalaya'>Meghalaya</option>
-<option value='Mizoram'>Mizoram</option>
-<option value='Nagaland'>Nagaland</option>
-<option value='Odisha'>Odisha</option>
-<option value='Puducherry'>Puducherry</option>
-<option value='Punjab'>Punjab</option>
-<option value='Rajasthan'>Rajasthan</option>
-<option value='Sikkim'>Sikkim</option>
-<option value='Tamil Nadu'>Tamil Nadu</option>
-<option value='Telengana'>Telengana</option>
-<option value='Tripura'>Tripura</option>
-<option value='Uttar Pradesh'>Uttar Pradesh</option>
-<option value='Uttarakhand'>Uttarakhand</option>
-<option value='West Bengal'>West Bengal</option>
-</select></br></br>
-	
-			
-			<input class="btn2" id="save" type="submit" value="SAVE">
-			</form>
+	</tr>
+	<tr>
+		<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
+		<td>SMS</td>
+		<td class="delete"><img width="30px" src="images/delete.png"></td>
+		
+	</tr>
+	</table>
 		</div>
-	</div>	
+
+	</article>
+	<aside class="col-lg-3 col-sm-4 col-lg-pull-9 col-sm-pull-8">
+			<div id='cssmenu'>
+				<ul class="nav nav-pills nav-stacked">
+				   <li class="active"><a href='#'>Subscriber</a></li>
+				   <li><a href='#'>Users</a></li>
+				   <li><a href='#'>Services</a></li>   
+				</ul>
+			</div>
+		</aside>
+	</div> <!-- End of row -->
+	<div class="footermenu nav">
+	<ul>
+	   <li class='active'><a href='#'><span>Contact Us</span></a></li>
+	   <li><a href='#'><span>About</span></a></li> 
+	<div class="footer"></div>
+	</ul>
 </div>
-</br>
-<div id="user_table">
-<button class="add" id="add">ADD</button>
-<table>
-<tr>
-<th>Service Name</th>
-<th>Product Name</th>
+	<!-- javascript -->
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-</tr>
-<tr>
-	<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
-	<td>SMS</td>
-	<td class="delete"><img width="30px" src="images/delete.png"></td>
-	
-</tr>
-</table>
-	</div>
-</div>	
-
-<div class="footermenu">
-<ul>
-   <li class='active'><a href='#'><span>Contact Us</span></a></li>
-   <li><a href='#'><span>About</span></a></li> 
-<div class="footer"></div>
-</ul>
-
-
-
- </body>
+</body>
 </html>
 

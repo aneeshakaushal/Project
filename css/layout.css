@@ -1,10 +1,16 @@
 body{
-  margin: 0 auto;
   top: 0px;
   background: url(../images/bg.png);
   font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+  padding-top: 50px;
 }
 
+.container {
+  margin-right: auto;
+  margin-left: -15;
+  padding-left: 15px;
+  padding-right: 15px;
+}
 
 .tab-panels ul li{
 	list-style-type: none;
@@ -72,38 +78,19 @@ body{
   font-size: 15px;
   font-style: italic;
 }
-#content {
- 
-  margin : 100px 0px 100px 250px;
-  padding-left : 5px;
-  padding-right : 12px;
-  color : #000000;
-
-  overflow : auto;
-}
-
 /*header & header buttons*/
-
-.lines { 
-    background-color: transparent;
-    border-bottom: 12px double #006699; 
-    border-top: 4px solid #006699; 
-    content:"";
-    height: 5px; 
-    width:30px;  
-    margin-left: 10px;
-     
-    display: block; 
-    margin-top: 20px;
-    margin-bottom: 5px;
-
-  
+#arrow{
+  height:2px;
+}
+.lines {        
+    font-size: 2em; 
+    padding: .3em;
+    
 }
 .lines:hover {
   cursor: hand;
-  border-bottom: 12px double white; 
-  border-top: 4px solid white;
-  transition: .5s ease; 
+  transition: .7s ease; 
+  color: #006699;
 }
 
 
@@ -127,8 +114,6 @@ body{
 .ghost {
   background-color: transparent;
   color: #006699;
-  
-  font-weight: bolder;
   font-size: 15px;
  
 }
@@ -142,7 +127,6 @@ body{
 
 .right{
   float: right;
-
 }
 .header{  
   z-index: 1;
@@ -157,15 +141,10 @@ body{
 }
 
 #logo{
-  margin-right: auto;
-  margin-left: auto;
-  display: block;
-  width : 250px;
-
-
-}
-.top{
-  margin-top: -110px;
+  float: right;
+  width : 200px;
+  padding: .4em;
+  padding-top: .8em;
 }
 
 /*form css*/
@@ -286,4 +265,9 @@ input[type="checkbox"]{
 .footermenu li a:active {
   background-color: #006699;
   color: #fff;  
-}*/
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+color: #000;
+background-color: #dad671;
+}

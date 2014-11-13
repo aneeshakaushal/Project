@@ -1,36 +1,25 @@
-table {
-	
-	table-layout: fixed;
-	width:560px;
-	
-	
+table{
+	width: auto !important;
 }
 td{
-
-	 padding: 5px;
-	 word-wrap:break-word;
+	 
 	 background-color: rgba(0,0,0,.1);
 }
 th{
-	padding: 10px;
 	 color: white;
-	 word-wrap:break-word;
 	 background-color: rgba(0,0,0,.6);
 }
-td:hover{
+tr:hover{
  cursor: pointer;
- background-color: rgba(255,255,255,.7);
+ background-color: rgba(255,255,255,.4);
 }
 
 .add{  
   
-  background: url(../images/gr-yellow.png);
-  
+  background: url(../images/gr-yellow.png);  
   height: 40px;
-  width: 60px;
-  
+  width: 60px;  
   border:5px solid #2676a2;
-
   border-radius:50px;
   -webkit-border-radius:50px;
   -moz-border-radius:50px;
@@ -47,6 +36,7 @@ td:hover{
 .delete{
 	float:none;	
 	background-color: transparent;
+	border : none;
 }
 .delete:hover{	
 	background-color: transparent;
