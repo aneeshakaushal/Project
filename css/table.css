@@ -15,21 +15,14 @@ tr:hover{
 }
 
 .add{    
-  background: url(../images/gr-yellow.png);  
-  height: 40px;
-  width: auto;  
-  border:5px solid #2676a2;
-  border-radius:50px;
-  -webkit-border-radius:50px;
-  -moz-border-radius:50px;
-  color:  #2676a2;
+  color:  blue;
   font-weight: bolder;
- font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif
+ font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
+
 }
 
 .add:hover{
-	cursor: pointer;
-	background: #dad671 ;
+	cursor: pointer;color: yellow;
 }
 
 .actions a{
