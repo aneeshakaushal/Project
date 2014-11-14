@@ -14,11 +14,10 @@ tr:hover{
  background-color: rgba(255,255,255,.4);
 }
 
-.add{  
-  
+.add{    
   background: url(../images/gr-yellow.png);  
   height: 40px;
-  width: 60px;  
+  width: auto;  
   border:5px solid #2676a2;
   border-radius:50px;
   -webkit-border-radius:50px;
@@ -33,11 +32,11 @@ tr:hover{
 	background: #dad671 ;
 }
 
-.delete{
-	float:none;	
-	background-color: transparent;
-	border : none;
+.actions a{
+	color: blue;
+	font-size: .8em;
 }
-.delete:hover{	
-	background-color: transparent;
+.actions a:hover{
+	color: yellow;
+	font-size: .8em;
 }

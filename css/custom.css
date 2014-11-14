@@ -6,3 +6,38 @@ color:white;
 text-decoration: none;
 background-color: transparent;
 }
+
+#cssmenu .glyphicon{
+	font-size: 13px;
+}
+
+.nav.nav-center {
+    display: inline-block;
+    left: 0;
+    right: 0;
+    margin:0;
+    float:none;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+.nav.nav-center {
+    display: inline-block;
+    left: 0;
+    right: 0;
+    margin:0;
+    float:none;
+}
+
+.navbar-inner{
+    text-align:center;
+}
+nav{
+	padding:  0 .7em;
+}
+.jumbotron{
+	margin-top: 100px;
+	background-color: rgba(238,238,238,0.7);
+}
