@@ -1,1 +1,4 @@
 JavaScript : https://developer.mozilla.org/en-US/docs/Web/JavaScript 
+	     for OOPS concepts :- https://www.youtube.com/watch?v=PMfcsYzj-9M
+Design Patterns : http://www.tutorialspoint.com/design_pattern/index.htm
+Design Patterns Javascript : http://addyosmani.com/resources/essentialjsdesignpatterns/book/
