@@ -2,3 +2,13 @@ JavaScript : https://developer.mozilla.org/en-US/docs/Web/JavaScript
 	     for OOPS concepts :- https://www.youtube.com/watch?v=PMfcsYzj-9M
 Design Patterns : http://www.tutorialspoint.com/design_pattern/index.htm
 Design Patterns Javascript : http://addyosmani.com/resources/essentialjsdesignpatterns/book/
+DOM : https://www.youtube.com/watch?v=IOFN8Shwzs0
+      https://www.youtube.com/watch?v=622BbW9AoBQ
+      https://www.youtube.com/watch?v=aPW_wQEFvek&list=PL18600E7CA651B16B&index=1
+JSON : https://www.youtube.com/watch?v=rncW-74VL7U
+	https://www.youtube.com/watch?v=wbB3lVyUvAM
+Underscore : https://www.youtube.com/watch?v=q-Ih7x4iq9A
+	http://underscorejs.org/
+
+
+
