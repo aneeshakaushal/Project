@@ -41,3 +41,11 @@ nav{
 	margin-top: 100px;
 	background-color: rgba(238,238,238,0.7);
 }
+.alert{
+   font-weight: bold;
+   width : 50%;
+   margin-top: 50px;
+}
+.glyphicon:hover{
+    color :blue;
+}

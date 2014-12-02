@@ -9,6 +9,7 @@ JSON : https://www.youtube.com/watch?v=rncW-74VL7U
 	https://www.youtube.com/watch?v=wbB3lVyUvAM
 Underscore : https://www.youtube.com/watch?v=q-Ih7x4iq9A
 	http://underscorejs.org/
-
+MVC : http://addyosmani.com/blog/understanding-mvc-and-mvp-for-javascript-and-backbone-developers/
+Ember js : https://www.youtube.com/playlist?list=PL0nNJgE19Y-js_1XHA5QdEU1ed_ldOaks
 
 
