@@ -1,9 +1,31 @@
+
 function Model(name){
     this.name = name;
 }
-function SubscriberModel(name){
+
+function SubscriberModel(name,userList,subscriptionList){
     Model.call(this,name);
+    this.userList = userList;
+    this.subscriptionList = subscriptionList;
 }
+SubscriberModel.prototype = {
+    getUserCount : function(){
+        return this.userList.length;
+    },
+    getSubscriptionCount : function(){
+        return this.subscriptionList.length;
+    }
+}
+
+SubscriberModel.prototype = Object.create(Model.prototype);
+SubscriberModel.prototype.constructor = SubscriberModel;
+
+function UserModel(name,subscriber,admin){
+    Model.call(this,name);
+    this.subscriber = subscriber;
+    this.admin = admin;
+}
+
 function ListModel(items) {
     this._items = items;
     this._selectedIndex = -1;
@@ -45,6 +67,12 @@ ListModel.prototype = {
         this.selectedIndexChanged.notify({ previous : previousIndex });
     }
 };
+function ListSubscriberModel(items){
+    ListModel.call(this,items);
+}
+
+ListSubscriberModel.prototype = Object.create(ListModel.prototype);
+ListSubscriberModel.constructor.prototype = ListSubscriberModel;
 
 /*Event is a simple class for implementing the Observer pattern*/
 function Event(sender) {
@@ -100,18 +128,10 @@ ListView.prototype = {
     },
 
     addRow : function () {
-        var list, items, key;
-
-        list = this._elements.list; // list : #list 
-        list.html($('<tr><th>Name</th><th>Number of Users</th><th>Number of Subscriptions</th><th>Action</th></tr>'));
-        items = this._model.getItems();
-        for (key in items) {
-                if (items.hasOwnProperty(key))
-                    list.append('<tr><td>'+items[key].name+'</td><td>0</td><td>0</td><td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span></td></tr>');
-          
-            console.log(items[key]);
-        }
-        this._model.setSelectedIndex(-1);
+    var template = Handlebars.compile($('#template').html());
+    var temp=template(this._model);
+    $('#subscriber_table').append(temp);
+    $("#subscriber_count").text("("+this._model._items.length +" )");
     }
 };
 
@@ -145,7 +165,7 @@ ListController.prototype = {
         var item = $('#name').val();
         console.log("the value is"+item);
         if (bool == true) {
-            this._model.addItem(new SubscriberModel(item));
+            this._model.addItem(new SubscriberModel(item,[],[]));
         }
     },
 
@@ -164,10 +184,22 @@ ListController.prototype = {
 };
 
 $(function(){
-	var model1 = new SubscriberModel('abc');
-	var model2 = new SubscriberModel('xyz');
-	var model_list = new ListModel([model1,model2]); 
+
+	var model1 = new SubscriberModel('abc',[],[]);
+	var model2 = new SubscriberModel('xyz',[],[]);
+	var model_list = new ListSubscriberModel([model1,model2]); 
 	var view = new ListView(model_list, {'list': $('#table1'), 'addButton' : $('#save') ,'delButton':$('#delete')}); //new listView(model,elements)
 	var controller = new ListController(model_list, view);
-	view.show();
+
+    view.show();
+    //wants a path to where your template is stored
+    // we say Handlebar take this template and compile it.. a function is returned
+    var template = Handlebars.compile($('#template').html());
+    var temp=template(model_list);
+    $('#subscriber_table').append(temp);
+
+    var arr = [1,2,2,2];
+    /*Count in side bar*/
+    $("#subscriber_count").text("("+model_list._items.length +" )");
+
 });

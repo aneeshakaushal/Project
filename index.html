@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<script type="text/javascript" src="js/respond.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+
 </head>
 	<body>
 
@@ -31,10 +32,12 @@
 			<ul class="nav navbar-nav">
 				<li class="ghost "><A HREF="home.html">Home &nbsp;<span class="glyphicon glyphicon-home"></span></A></li>				
 			</ul>
-			<ul class="nav navbar-nav navbar-right" id="#right_nav_menu">			
+			<ul class="nav navbar-nav navbar-right" id="#right_nav_menu">
+
 			<li class="ghost"><A HREF="#">Settings &nbsp;<span class="glyphicon glyphicon-wrench"></span></a></li>
 			<li class="ghost"><A HREF="#">Logout &nbsp;<span class="glyphicon glyphicon-log-out"></span></a></li>
 			<li><A HREF="#"><i>Aneesha Kaushal &nbsp;</i></a></li>
+			<li ><A HREF="#" id="date"><i> &nbsp;</i></a></li>
 		</ul>
 		</div>
 	</nav>
@@ -184,17 +187,26 @@
 				</div>
 			</div>
 			</br>
-		</div>
-	<div id="subscriber_table">
-		<button id="add" class="add"HREF="" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-						<br>
+		</div><button id="add" class="add"HREF="" type="button"><span class="glyphicon glyphicon-plus"></span></button><br>
+<div id="subscriber_table">
+<script id="template" type="text/x-handlebars-template">
 
+<table id="table2" size=10 class="table table-bordered">				
+	<tr>
+		<th>Name</th>
+		<th>Number of Users</th>
+		<th>Number of Subscriptions</th>
+		<th>Action</th>
+					
+		{{#each _items}}
+		<tr><td>{{name}}</td><td>{{userList.length}}</td><td>{{subscriptionList.length}}</td>
+		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span></td></tr>
+		{{/each}}
 
-	<table id="table2" size=10 class="table table-bordered"></table>					
-	<table id="table1" class="table table-bordered">
-	
-	</table>
-	</div>
+		
+</table>
+</div>
+	</script>
 	</div>
 	<div id="users">
 			<h1>Users</h1>
@@ -322,7 +334,7 @@
 	<aside class="col-lg-3 col-sm-4 col-xs-2 col-lg-pull-9 col-sm-pull-8 col-xs-pull-10">
 			<div id='cssmenu'>
 				<ul class="nav nav-pills nav-stacked hidden-xs">
-				   <li class="active"><a href='#'>Subscriber &ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> </a></li>
+				   <li class="active"><a href='#'>Subscriber <span id="subscriber_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> </a></li>
 				   <li><a href='#users'>Users &ensp;&ensp;<span class=" pull-right glyphicon glyphicon-user"></span></a></li>
 				   <li><a href='#services'>Services &ensp;&ensp;<span class="pull-right glyphicon glyphicon-flash"></span></a></li>   
 				</ul>
@@ -344,10 +356,15 @@
 
 	<!-- javascript -->
 	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/underscore.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/custom.js"></script>
 	<script type="text/javascript" src="js/mvc.js"></script>
+	<script type="text/javascript" src="js/handlebars.js"></script>
+	<script type="text/javascript" src="js/moment.min.js"></script>
+
+
 </body>
 
 </html>

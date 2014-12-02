@@ -26,9 +26,11 @@ function validateForm2(){
 
 $(function() {
 	$( ".datepicker" ).datepicker();
-	$("#name").keyup(function(){
+	$("#date").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    $("#name").keyup(function(){
     if ($(this).val().length != 0){
         $("#myAlert").removeClass("in");
+
     }
 });
  }
