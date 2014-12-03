@@ -66,13 +66,13 @@ ListModel.prototype = {
         this._selectedIndex = index;
         this.selectedIndexChanged.notify({ previous : previousIndex });
     }
-};
+};/*
 function ListSubscriberModel(items){
     ListModel.call(this,items);
 }
 
 ListSubscriberModel.prototype = Object.create(ListModel.prototype);
-ListSubscriberModel.constructor.prototype = ListSubscriberModel;
+ListSubscriberModel.constructor.prototype = ListSubscriberModel;*/
 
 /*Event is a simple class for implementing the Observer pattern*/
 function Event(sender) {
@@ -96,14 +96,15 @@ Event.prototype = {
  * the UI events. The controller is attached to these
  * events to handle the user interraction.
  */
-function ListView(model, elements) {
+function ListView(model, elements,template) {
     this._model = model;
     this._elements = elements;
-
+    this._template = this._elements.template;
+    this._count = this._elements.count;
+    this._list = this._elements.list;
     this.listModified = new Event(this);
     this.addButtonClicked = new Event(this);
     this.delButtonClicked = new Event(this);
-
     var _this = this;
 
     // attach model listeners
@@ -127,11 +128,12 @@ ListView.prototype = {
         this.addRow();
     },
 
-    addRow : function () {
-    var template = Handlebars.compile($('#template').html());
-    var temp=template(this._model);
-    $('#subscriber_table').append(temp);
-    $("#subscriber_count").text("("+this._model._items.length +" )");
+    addRow : function () {    
+    var template = Handlebars.compile(this._template.html());
+    var temp=template(this._model);      
+    this._list.append(temp);
+     /*Count in side bar*/
+     this._count.text("("+this._model._items.length +" )");
     }
 };
 
@@ -160,13 +162,27 @@ function ListController(model, view) {
 
 ListController.prototype = {
     addItem : function () {
+        if(this._model._items[0] instanceof SubscriberModel){
         var bool=validateSubscriberForm();
         console.log(bool);
         var item = $('#name').val();
         console.log("the value is"+item);
         if (bool == true) {
-            this._model.addItem(new SubscriberModel(item,[],[]));
+                this._model.addItem(new SubscriberModel(item,[],[]));
+            }
         }
+        else if(this._model._items[0] instanceof UserModel){
+            var bool=validateUserForm();
+            console.log(bool+"hello");
+            var item = $('#name_user').val();
+            var subscriber = $('#sub_select').val();
+            var admin = $('#admin').prop('checked');
+            console.log("the value is"+item);
+            if (bool == true) {
+                this._model.addItem(new UserModel(item,subscriber,admin));
+            }
+        }
+    
     },
 
     delItem : function () {
@@ -187,19 +203,30 @@ $(function(){
 
 	var model1 = new SubscriberModel('abc',[],[]);
 	var model2 = new SubscriberModel('xyz',[],[]);
-	var model_list = new ListSubscriberModel([model1,model2]); 
-	var view = new ListView(model_list, {'list': $('#table1'), 'addButton' : $('#save') ,'delButton':$('#delete')}); //new listView(model,elements)
+	var model_list = new ListModel([model1,model2]); 
+	var view = new ListView(model_list, {'list': $('#subscriber_table'), 'addButton' : $('#save') ,'delButton':$('#delete'),'template':$('#template'),'count':$('subscriber_count')}); //new listView(model,elements)
 	var controller = new ListController(model_list, view);
-
     view.show();
-    //wants a path to where your template is stored
-    // we say Handlebar take this template and compile it.. a function is returned
+    //Template for Subscriber table
     var template = Handlebars.compile($('#template').html());
-    var temp=template(model_list);
+    var temp=template(model_list);      
     $('#subscriber_table').append(temp);
-
-    var arr = [1,2,2,2];
-    /*Count in side bar*/
+    // Count in side bar
     $("#subscriber_count").text("("+model_list._items.length +" )");
+
+    var user1 = new UserModel('abc','SubscriberName',true);
+    var user2 = new UserModel('xyz','SubscriberName2',false);
+    var user3 = new UserModel('pqr','SubscriberName2',false);
+    var model_list_user = new ListModel([user1,user2,user3]); 
+    var view_user = new ListView(model_list_user, {'list': $('#user_table'), 'addButton' : $('#save_user') ,'delButton':$('#delete'),'template':$('#template_user'),'count':$('user_count')}); //new listView(model,elements)
+    var controller_user = new ListController(model_list_user, view_user);
+    view_user.show();    
+
+    //*Template for user table
+    var template_user = Handlebars.compile($('#template_user').html());
+    var temp_user=template_user(model_list_user);      
+    $('#user_table').append(temp_user);
+    //*Count in side bar
+    $("#user_count").text("("+model_list_user._items.length +" )");
 
 });

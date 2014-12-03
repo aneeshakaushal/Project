@@ -45,7 +45,16 @@ nav{
    font-weight: bold;
    width : 50%;
    margin-top: 50px;
+   position:  fixed;
 }
 .glyphicon:hover{
     color :blue;
+    cursor: pointer;
+}
+
+.tab-panels,#subscription_form{
+    display: none;
+}
+#services,#users{
+    display: none;
 }
