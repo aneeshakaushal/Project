@@ -72,15 +72,12 @@
 					<div id="subscription_form" >
 						<form action="#" id="form1" onSubmit="return validateSubscriptionForm()">
 						Service : 
-						<select id= "service" class="box" >
-						<option>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.
-						</option>
-						<option>Depositing a voice message-Re 0.75 </option>
+						<select id="service_select" class="box" >
 						</select>
 						</br></br>
 						<input id="startDate" class="box datepicker" type="text" placeholder="Start Date :"></p>
 						<input id="endDate" class="box datepicker" type="text" placeholder="End Date :"></p> 
-						<input class="btn2" id="save" type="submit" value="SAVE">
+						<input class="btn2" id="save_subscription" type="submit" value="SAVE">
 						<select class="box">
 	<option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
 	<option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
@@ -168,41 +165,33 @@
 						</form>
 					</div>
 
-					</br>
-					<div id="subscription_table">
-						<span id="subscription-add" class="glyphicon glyphicon-plus"></span>
+					</br><span id="subscription-add" class="glyphicon glyphicon-plus"></span>
 						<br>
-						<table class="table table-bordered">
+					 <div id="subscription_table">						
+						<table size=10 class="table table-bordered">
 							<thead>
 								<tr>
-									<th>Service Name</th>
-									<th>Start Date</th>
-									<th>End Date</th>
+									<th>Name</th>
+									<th>Number of Users</th>
+									<th>Number of Subscriptions</th>
 									<th>Action</th>
 								</tr>
 							</thead>
-							<tbody id="subsciption_table_body"> 
+							<tbody id="subscription_table_body"> 
 								<script id="template_subscription" type="text/x-handlebars-template">
 									{{#each _items}}
 									<tr><td>{{name}}</td><td>{{startDate}}</td><td>{{endDate}}</td>
 										<td class="actions">
 											&nbsp;<span class="glyphicon glyphicon-edit"></span>
-											&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>
+											&nbsp;&nbsp;<span class="delete_subscription"><span class="glyphicon glyphicon-trash "></span></span>
 											&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span>
 										</td>
 									</tr>
 									{{/each}}
 								</script>
 							 </tbody>
-							<!-- <tr>
-								<td>Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.</td>
-								<td>4/12/2014</td>
-								<td>5/12/2015</td>
-								<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;<span class="glyphicon glyphicon-th-list"></span></td>
-							</tr> -->
-
-						</table>
-					</div>		
+							</table>
+					</div>
 				</div>
 			</div>
 			</br>
@@ -217,12 +206,17 @@
 		<th>Number of Subscriptions</th>
 		<th>Action</th>
 	</tr>
+	<tr><td>DEFAULT</td><td>0</td><td>0</td>
+		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<span class="glyphicon glyphicon-trash default"></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
 </thead>
 <tbody id="subscriber_table_body">
+
 	<script id="template" type="text/x-handlebars-template">
 		{{#each _items}}
 		<tr><td>{{name}}</td><td>{{userList.length}}</td><td>{{subscriptionList.length}}</td>
-		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
+		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<span class="delete_subscriber"><span class="glyphicon glyphicon-trash"></span></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
 		{{/each}}
 	</script>
 </tbody>
@@ -268,7 +262,8 @@
 	<script id="template_user" type="text/x-handlebars-template">
 		{{#each _items}}
 		<tr><td>{{name}}</td><td>{{subscriber.name}}</td><td>{{admin}}</td>
-		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
+		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<span class="delete_user"><span class="glyphicon glyphicon-trash "></span></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
 		{{/each}}
 	</script>
 </tbody>
@@ -284,7 +279,7 @@
 		<div id="details" class="panel active">
 			<div id="service_form">
 				<form action="#" id="form3">
-				<input class="box"type="Text" placeholder="Service Name"></br></br></input>
+				<input class="box"type="Text" placeholder="Service Name" id="name_service"></br></br></input>
 				Product : 
 				<select id="product" class="box">
 					<option>Calls</option>
@@ -332,7 +327,7 @@ Market :
     <option value='West Bengal'>West Bengal</option>
     </select></br></br>
 				
-				<input class="btn2" id="save" type="submit" value="SAVE">
+				<input class="btn2" id="save_service" type="submit" value="SAVE">
 				</form>
 			</div>
 		</div>	
@@ -350,12 +345,13 @@ Market :
 		<th>Action</th>
 		</tr>
 	</thead>
-	<tbody><tr>
-		<script id="template_user" type="text/x-handlebars-template">
-		{{#each _items}}
-		<tr><td>{{name}}</td><td>{{product}}</td><td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;<span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
-		{{/each}}
-	</script>
+	<tbody id="service_table_body">
+		<script id="template_service" type="text/x-handlebars-template">
+			{{#each _items}}
+			<tr><td>{{name}}</td><td>{{product}}</td><td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+			<span class="delete_service"><span class="glyphicon glyphicon-trash "></span></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
+			{{/each}}
+		</script>
 	</tbody>	
 	</table>
 		</div>
@@ -366,7 +362,7 @@ Market :
 				<ul class="nav nav-pills nav-stacked hidden-xs">
 				   <li class="active"><a href='#subscriber'>Subscriber <span id="subscriber_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> </a></li>
 				   <li><a href='#users'>Users <span id="user_count"></span>&ensp;&ensp;<span class=" pull-right glyphicon glyphicon-user"></span></a></li>
-				   <li><a href='#services'>Services &ensp;&ensp;<span class="pull-right glyphicon glyphicon-flash"></span></a></li>   
+				   <li><a href='#services'>Services <span id="service_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-flash"></span></a></li>   
 				</ul>
 		`		<ul class=" nav nav-pills nav-stacked visible-xs" id="#icon_bar">
 						 <li class="active"><a href='#'><span class="glyphicon glyphicon-user"></span> </a></li>
@@ -393,13 +389,14 @@ Market :
 	<script type="text/javascript" src="js/handlebars.js"></script>
 	<script type="text/javascript" src="js/moment.min.js"></script>
 	<script src="js/select2-3.5.2/select2.js"></script>
+	
 	<script type="text/javascript" src="js/custom.js"></script>
-	<script id="subscriber_select_template" type="text/x-handlebars-template">
+	<script id="select_template" type="text/x-handlebars-template">
 						{{#each _items}}
 						<option>{{name}}</option>
 						{{/each}}
 	</script>
-<script type="text/javascript">
+	<script type="text/javascript">
 	$(document).ready(function(){
 		$("select").select2({
 		});

@@ -29,11 +29,7 @@ function validateSubscriptionForm(){
          $("#myAlert").addClass("in");
         return false;
     }
-     if (moment(endDate) > moment(startDate)) {        
-        $("#myAlert").text("End date should be greater than Start date");
-         $("#myAlert").addClass("in");
-        $('#endDate').val("");
-    }
+    return true;
 }
 
 function validateUserForm(){
@@ -51,8 +47,36 @@ function validateUserForm(){
     return true;   
 }
 
+function validateServiceForm() {
+
+    var name = $('#name_service').val();
+    if (name == null || name =="") {
+       $("#myAlert").text("Please enter name!");
+         $("#myAlert").addClass("in");
+        return false;
+    }
+    return true;   
+}
+
+
+
 $(function() {
-	$( ".datepicker" ).datepicker();
+
+
+    /*Filling form */
+   /*  $("#subscriber_table").click(function(){
+
+        alert("table clicked");
+        var name = $(this).parent().siblings(".name").text();
+        var price = $(this).parent().siblings(".price").text();
+        var priceWithinAllocation = $(this).parent().siblings(".priceWithinAllocation").text();
+        $("[name='name']").val(name);
+        $("[name='price']").val(price);
+        $("[name='priceWithinAllocation']").val(priceWithinAllocation);
+    });*/
+
+
+   	$( ".datepicker" ).datepicker();
 	$("#date").text(moment().format('MMMM Do YYYY, h:mm:ss a')); 
     $("#arrow-right").click(function(){
         $("#side_bar").toggle();
