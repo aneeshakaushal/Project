@@ -27,7 +27,7 @@ body{
 
 .tab-panels ul li.active{
 	color: #fff;
-	background: rgba(0,0,0,0.6); 
+	background: rgba(0,0,0,0.6);
 }
 
 .tab-panels .panel{

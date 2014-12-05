@@ -1,30 +1,56 @@
+var model_list;
+var model_list_user;
+var view;
 
 function Model(name){
     this.name = name;
 }
 
-function SubscriberModel(name,userList,subscriptionList){
-    Model.call(this,name);
-    this.userList = userList;
-    this.subscriptionList = subscriptionList;
-}
-SubscriberModel.prototype = {
-    getUserCount : function(){
-        return this.userList.length;
-    },
-    getSubscriptionCount : function(){
-        return this.subscriptionList.length;
-    }
-}
-
-SubscriberModel.prototype = Object.create(Model.prototype);
-SubscriberModel.prototype.constructor = SubscriberModel;
 
 function UserModel(name,subscriber,admin){
     Model.call(this,name);
     this.subscriber = subscriber;
     this.admin = admin;
 }
+
+UserModel.prototype = Object.create(Model.prototype);
+UserModel.prototype.constructor = UserModel;
+
+function SubscriberModel(name,userList,subscriptionList){
+    Model.call(this,name);
+    this.userList = userList;
+    this.subscriptionList = subscriptionList;
+}
+
+SubscriberModel.prototype = Object.create(Model.prototype);
+SubscriberModel.prototype.constructor = SubscriberModel;
+SubscriberModel.prototype = {
+    populateUsers : function(user){
+        console.log("The user added is "+ user.name);
+        this.userList.push(user);
+        view.show();
+    }
+}
+function SubscriptionModel(name,startDate,endDate){
+    Model.call(this,name);
+    this.startDate = startDate;
+    this.endDate = endDate;
+}
+
+SubscriptionModel.prototype = Object.create(Model.prototype);
+SubscriptionModel.prototype.constructor = SubscriptionModel;
+
+
+function ServiceModel(name,product,market){
+    Model.call(this,name);
+    this.product = product;
+    this.market = market;
+}
+
+ServiceModel.prototype = Object.create(Model.prototype);
+ServiceModel.prototype.constructor = ServiceModel;
+
+
 
 function ListModel(items) {
     this._items = items;
@@ -66,7 +92,8 @@ ListModel.prototype = {
         this._selectedIndex = index;
         this.selectedIndexChanged.notify({ previous : previousIndex });
     }
-};/*
+};
+/*
 function ListSubscriberModel(items){
     ListModel.call(this,items);
 }
@@ -108,8 +135,8 @@ function ListView(model, elements,template) {
     var _this = this;
 
     // attach model listeners
-    this._model.itemAdded.attach(function () { _this.addRow(); });
-    this._model.itemRemoved.attach(function () { _this.addRow(); });
+    this._model.itemAdded.attach(function () { _this.show(); });
+    this._model.itemRemoved.attach(function () { _this.show(); });
 
     // attach listeners to HTML controls
     this._elements.list.change(function (e) {
@@ -125,16 +152,13 @@ function ListView(model, elements,template) {
 
 ListView.prototype = {
     show : function () {
-        this.addRow();
-    },
-
-    addRow : function () {    
-    var template = Handlebars.compile(this._template.html());
-    var temp=template(this._model);      
-    this._list.append(temp);
-     /*Count in side bar*/
-     this._count.text("("+this._model._items.length +" )");
-    }
+        var template = Handlebars.compile(this._template.html());
+        var temp=template(this._model);
+        this._list.empty();
+        this._list.append(temp);
+        this._count.text("("+this._model._items.length +" )");
+        fillSubscriberList();
+    }   
 };
 
 /**
@@ -169,18 +193,27 @@ ListController.prototype = {
         console.log("the value is"+item);
         if (bool == true) {
                 this._model.addItem(new SubscriberModel(item,[],[]));
+
             }
         }
         else if(this._model._items[0] instanceof UserModel){
+            var subscriber = $.grep(model_list._items,function(e){
+                return e.name == $("#subscriber_select").val(); 
+            })[0];
+            console.log(subscriber.name);
             var bool=validateUserForm();
-            console.log(bool+"hello");
+            console.log(bool+"hello i am user");
             var item = $('#name_user').val();
-            var subscriber = $('#sub_select').val();
             var admin = $('#admin').prop('checked');
             console.log("the value is"+item);
+            var user = new UserModel(item,subscriber,admin);
+
             if (bool == true) {
-                this._model.addItem(new UserModel(item,subscriber,admin));
+                this._model.addItem(user);
             }
+
+            subscriber.populateUsers(user);
+
         }
     
     },
@@ -199,34 +232,48 @@ ListController.prototype = {
     }
 };
 
+function fillSubscriberList(){
+    var template = Handlebars.compile($('#subscriber_select_template').html());
+        var temp=template(model_list);
+        $('#subscriber_select').empty();
+         $('#subscriber_select').append(temp);
+}
+
 $(function(){
 
-	var model1 = new SubscriberModel('abc',[],[]);
-	var model2 = new SubscriberModel('xyz',[],[]);
-	var model_list = new ListModel([model1,model2]); 
-	var view = new ListView(model_list, {'list': $('#subscriber_table'), 'addButton' : $('#save') ,'delButton':$('#delete'),'template':$('#template'),'count':$('subscriber_count')}); //new listView(model,elements)
+	model1 = new SubscriberModel('abc',[1,3],[]);
+	model2 = new SubscriberModel('subscriber2',[],[]);
+	model_list = new ListModel([model1,model2]); 
+	view = new ListView(model_list, {'list': $('#subscriber_table_body'), 'addButton' : $('#save') ,'delButton':$('#delete'),'template':$('#template'),'count':$('#subscriber_count')}); //new listView(model,elements)
 	var controller = new ListController(model_list, view);
     view.show();
-    //Template for Subscriber table
-    var template = Handlebars.compile($('#template').html());
-    var temp=template(model_list);      
-    $('#subscriber_table').append(temp);
-    // Count in side bar
-    $("#subscriber_count").text("("+model_list._items.length +" )");
 
-    var user1 = new UserModel('abc','SubscriberName',true);
-    var user2 = new UserModel('xyz','SubscriberName2',false);
-    var user3 = new UserModel('pqr','SubscriberName2',false);
+
+
+    var user1 = new UserModel('abc',model1,true);
+    var user2 = new UserModel('xyz',model1,false);
+    var user3 = new UserModel('pqr',model2,false);
     var model_list_user = new ListModel([user1,user2,user3]); 
-    var view_user = new ListView(model_list_user, {'list': $('#user_table'), 'addButton' : $('#save_user') ,'delButton':$('#delete'),'template':$('#template_user'),'count':$('user_count')}); //new listView(model,elements)
+    var view_user = new ListView(model_list_user, {'list': $('#user_table_body'), 'addButton' : $('#save_user') ,'delButton':$('#delete'),'template':$('#template_user'),'count':$('#user_count')}); //new listView(model,elements)
     var controller_user = new ListController(model_list_user, view_user);
-    view_user.show();    
+    view_user.show();
 
-    //*Template for user table
-    var template_user = Handlebars.compile($('#template_user').html());
-    var temp_user=template_user(model_list_user);      
-    $('#user_table').append(temp_user);
-    //*Count in side bar
-    $("#user_count").text("("+model_list_user._items.length +" )");
+    var user1 = new UserModel('abc',model1,true);
+    var user2 = new UserModel('xyz',model1,false);
+    var user3 = new UserModel('pqr',model2,false);
+    var model_list_user = new ListModel([user1,user2,user3]); 
+    var view_user = new ListView(model_list_user, {'list': $('#user_table_body'), 'addButton' : $('#save_user') ,'delButton':$('#delete'),'template':$('#template_user'),'count':$('#user_count')}); //new listView(model,elements)
+    var controller_user = new ListController(model_list_user, view_user);
+    view_user.show();
+
+    var service1 = new ServiceModel('Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.','SMS');
+    var model_list_service = new ListModel([service1]); 
+    var view_service = new ListView(model_list_service, {'list': $('#service_table_body'), 'addButton' : $('#save_service') ,'delButton':$('#delete'),'template':$('#template_service'),'count':$('#service_count')}); //new listView(model,elements)
+    var controller_service = new ListController(model_list_service, view_service);
+    view_service.show();
+
+    /*filling subscriber list in user forum*/
+    fillSubscriberList();
+   
 
 });

@@ -76,7 +76,7 @@ $(function() {
     });
 
 
-    $("input").keyup(function(){
+    $("input").focusout(function(){
     if ($(this).val().length != 0){
         $("#myAlert").removeClass("in");
 

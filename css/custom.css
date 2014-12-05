@@ -45,7 +45,8 @@ nav{
    font-weight: bold;
    width : 50%;
    margin-top: 50px;
-   position:  fixed;
+   position:  fixed;  
+   margin-left: 20%;
 }
 .glyphicon:hover{
     color :blue;
