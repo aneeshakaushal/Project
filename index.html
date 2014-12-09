@@ -56,7 +56,7 @@
 		<div id="subscriber-panel" class="tab-panels">
 			<ul class="nav tabs">  <!-- tabs -->
 				<li class="active"><A HREF="#details" data-toggle="tab">Details</A></li>
-				<li ><A HREF="#subscri" data-toggle="tab">Subscription </A></li>
+				<li id="view_subscription"><A HREF="#subscri" data-toggle="tab">Subscription </A></li>
 			</ul>
 
 			<div class="tab-content">
@@ -64,7 +64,7 @@
 						<div id="subscriber_form">
 							<form action="#" id="form1" onSubmit="return validateSubscriberForm()">
 							<input class="box" type="Text" id="name" placeholder="Subscriber Name :"></br></br>
-							<input class="btn2"id="save" type="button" value="  SAVE   ">
+							<input class="btn2 save"id="save" type="button" value="  SAVE   ">
 							</form>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 						</br></br>
 						<input id="startDate" class="box datepicker" type="text" placeholder="Start Date :"></p>
 						<input id="endDate" class="box datepicker" type="text" placeholder="End Date :"></p> 
-						<input class="btn2" id="save_subscription" type="submit" value="SAVE">
+						<input class="btn2 save" id="save_subscription" type="submit" value="SAVE">
 						<select class="box">
 	<option timeZoneId="1" gmtAdjustment="GMT-12:00" useDaylightTime="0" value="-12">(GMT-12:00) International Date Line West</option>
 	<option timeZoneId="2" gmtAdjustment="GMT-11:00" useDaylightTime="0" value="-11">(GMT-11:00) Midway Island, Samoa</option>
@@ -180,9 +180,9 @@
 							<tbody id="subscription_table_body"> 
 								<script id="template_subscription" type="text/x-handlebars-template">
 									{{#each _items}}
-									<tr><td>{{name}}</td><td>{{startDate}}</td><td>{{endDate}}</td>
+									<tr><td class="serviceName">{{name}}</td><td class="startDate">{{startDate}}</td><td class="endDate">{{endDate}}</td>
 										<td class="actions">
-											&nbsp;<span class="glyphicon glyphicon-edit"></span>
+											&nbsp;<span class="subscription glyphicon glyphicon-edit"></span>
 											&nbsp;&nbsp;<span class="delete_subscription"><span class="glyphicon glyphicon-trash "></span></span>
 											&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span>
 										</td>
@@ -207,15 +207,15 @@
 		<th>Action</th>
 	</tr>
 	<tr><td>DEFAULT</td><td>0</td><td>0</td>
-		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
-		<span class="glyphicon glyphicon-trash default"></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
+		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit default"></span>&nbsp;&nbsp;
+		<span class="glyphicon glyphicon-trash default"></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list defaultSE="></span></td></tr>
 </thead>
 <tbody id="subscriber_table_body">
 
 	<script id="template" type="text/x-handlebars-template">
 		{{#each _items}}
-		<tr><td>{{name}}</td><td>{{userList.length}}</td><td>{{subscriptionList.length}}</td>
-		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<tr><td class="name">{{name}}</td><td class="userLength">{{userList.length}}</td><td class="subscriptionList">{{subscriptionList.length}}</td>
+		<td class="actions">&nbsp;<span class="subscriber glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
 		<span class="delete_subscriber"><span class="glyphicon glyphicon-trash"></span></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
 		{{/each}}
 	</script>
@@ -240,7 +240,7 @@
 				</select>
 				</br></br>
 				Admin : <input  id="admin" type="checkbox"></br> </br>
-				<input class="btn2" id="save_user" type="button" value="SAVE">
+				<input class="btn2 save" id="save_user" type="button" value="SAVE">
 				</form>
 			</div>
 			</div>	
@@ -261,8 +261,8 @@
 <tbody id="user_table_body">
 	<script id="template_user" type="text/x-handlebars-template">
 		{{#each _items}}
-		<tr><td>{{name}}</td><td>{{subscriber.name}}</td><td>{{admin}}</td>
-		<td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<tr><td class="userName">{{name}}</td><td class="subscriberName">{{subscriber.name}}</td><td class="admin">{{admin}}</td>
+		<td class="actions">&nbsp;<span class="user glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
 		<span class="delete_user"><span class="glyphicon glyphicon-trash "></span></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
 		{{/each}}
 	</script>
@@ -327,7 +327,7 @@ Market :
     <option value='West Bengal'>West Bengal</option>
     </select></br></br>
 				
-				<input class="btn2" id="save_service" type="submit" value="SAVE">
+				<input class="btn2 save" id="save_service" type="submit" value="SAVE">
 				</form>
 			</div>
 		</div>	
@@ -348,7 +348,7 @@ Market :
 	<tbody id="service_table_body">
 		<script id="template_service" type="text/x-handlebars-template">
 			{{#each _items}}
-			<tr><td>{{name}}</td><td>{{product}}</td><td class="actions">&nbsp;<span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+			<tr><td class="service">{{name}}</td><td class="product">{{product}}</td><td class="actions">&nbsp;<span class="service glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
 			<span class="delete_service"><span class="glyphicon glyphicon-trash "></span></span>&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span></td></tr>
 			{{/each}}
 		</script>
@@ -360,9 +360,9 @@ Market :
 	<aside id="side_bar" class="col-lg-3 col-sm-4 col-xs-2 col-lg-pull-9 col-sm-pull-8 col-xs-pull-10">
 			<div id='cssmenu'>
 				<ul class="nav nav-pills nav-stacked hidden-xs">
-				   <li class="active"><a href='#subscriber'>Subscriber <span id="subscriber_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> </a></li>
-				   <li><a href='#users'>Users <span id="user_count"></span>&ensp;&ensp;<span class=" pull-right glyphicon glyphicon-user"></span></a></li>
-				   <li><a href='#services'>Services <span id="service_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-flash"></span></a></li>   
+				   <li id="view" class="active"><a href='#subscriber'>Subscriber <span id="subscriber_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> </a></li>
+				   <li id="view_user"><a href='#users'>Users <span id="user_count"></span>&ensp;&ensp;<span class=" pull-right glyphicon glyphicon-user"></span></a></li>
+				   <li id="view_service"><a href='#services'>Services <span id="service_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-flash"></span></a></li>   
 				</ul>
 		`		<ul class=" nav nav-pills nav-stacked visible-xs" id="#icon_bar">
 						 <li class="active"><a href='#'><span class="glyphicon glyphicon-user"></span> </a></li>
