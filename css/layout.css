@@ -20,13 +20,13 @@ body{
 	margin: 0;
 	padding: 0;
 }
-.tab-panels ul li:hover{
+.tab-panels ul li:hover{/*
 	color:#fff;
-	background: rgba(0,0,0,0.6); 
+	background: rgba(0,0,0,0.6); */
 }
 
 .tab-panels ul li.active{
-	color: #fff;
+color: #fff;
 	background: rgba(0,0,0,0.6);
 }
 

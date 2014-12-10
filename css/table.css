@@ -34,3 +34,7 @@ tr:hover{
 	color: yellow;
 	font-size: .8em;
 }
+table > tbody > tr:first-child > td.actions a:hover{
+	background-color: red;
+	font-size :3000;
+};

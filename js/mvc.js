@@ -5,6 +5,8 @@ var model_list_service,model_list_subscription;
 var model1;
 var view_user;
 
+var subscriber_index = 0;
+
 function Model(name){
     this.name = name;
 }
@@ -40,13 +42,21 @@ SubscriberModel.prototype = {
             if( this.userList[i].name == user.name) this.userList.splice(i,1);
             }
             view.show();
+    },
+     depopulateSubscriptionList : function(subscription){
+        console.log("User removed is"+subscription.name);
+        for( i=this.subscriptionList.length-1; i>=0; i--) {
+            if( this.subscriptionList[i].name == subscription.name) this.subscriptionList.splice(i,1);
+        }
+            view.show();
     }
 }
 
-function SubscriptionModel(name,startDate,endDate){
+function SubscriptionModel(name,startDate,endDate,subscriber){
     Model.call(this,name);
     this.startDate = startDate;
     this.endDate = endDate;
+    this.subscriber = subscriber;
 }
 
 SubscriptionModel.prototype = Object.create(Model.prototype);
@@ -163,7 +173,9 @@ function ListView(model, elements,template) {
     });*/
 
     $(document).on('click',this._elements.addButton,function(e){      
-      _this.addButtonClicked.notify();
+      
+
+      _this.addButtonClicked.notify({index : subscriber_index});
        
     });
 
@@ -188,7 +200,9 @@ ListView.prototype = {
         this._list.empty();
         this._list.append(temp);
         console.log(temp);
-        this._count.text("("+this._model._items.length +" )");
+        if(this._count != $('#subscription_count'))
+            this._count.text("("+this._model._items.length +" )");
+        
         fillSubscriberList();
         fillServiceList();
     }   
@@ -205,8 +219,8 @@ function ListController(model, view) {
     var _this = this;
 
 
-    this._view.addButtonClicked.attach(function () {
-        _this.addItem();
+    this._view.addButtonClicked.attach(function (sender,args) {
+        _this.addItem(args.index);
     });
 
     this._view.delButtonClicked.attach(function (sender,args) {
@@ -219,7 +233,7 @@ function ListController(model, view) {
 }
 
 ListController.prototype = {
-    addItem : function () {    
+    addItem : function (index) {    
        /* alert("Adding an item");*/
         if(this._view._list.selector == '#subscriber_table_body'){
         var bool=validateSubscriberForm();
@@ -262,13 +276,17 @@ ListController.prototype = {
 
         }
         else if(this._view._list.selector == '#subscription_table_body'){
+            
             console.log("hello i am Subscription");
             var bool=validateSubscriptionForm();
             var service = $('#service_select').val();
             var startDate = $('#startDate').val();           
             var endDate = $('#endDate').val();
             if (bool == true) {
-                this._model.addItem(new SubscriptionModel(service,startDate,endDate));
+                var subscription = new SubscriptionModel(service,startDate,endDate,model_list._items[subscriber_index]);
+                model_list._items[subscriber_index].subscriptionList.push(subscription);
+                this._model.addItem(subscription);
+                view.show();
             }
 
         }
@@ -281,17 +299,23 @@ ListController.prototype = {
        if(this._view._list.selector == '#user_table_body'){
         var subscriber = this._model.getItem(index).subscriber;
         subscriber.depopulateList(this._model.getItem(index));
+
        }     
         if(this._view._list.selector == '#subscriber_table_body'){
+            if(index == 0)
+                return;
             console.log("I have u as subscriber");
             for(i = 0; i<model_list_user._items.length;i++){
             if(model_list_user._items[i].subscriber == this._model._items[index]){
                 model_list_user._items[i].subscriber = model1;
                 view_user.show();
-
             }
         }
-        }
+       }
+        if(this._view._list.selector == '#subscription_table_body'){
+        var subscriber = this._model.getItem(index).subscriber;
+        subscriber.depopulateSubscriptionList(this._model.getItem(index));
+       } 
        
        this._model.removeItemAt(index);
        console.log(index);
@@ -301,6 +325,11 @@ ListController.prototype = {
         //alert("Editing an item");
 
         if(this._view._list.selector == '#subscriber_table_body'){
+            if(index == 0)
+                {
+                    alert("Cant edit deafault");
+                    return ;
+                }
         $(document).off().on('click','#edit',function(){
                 var bool=validateSubscriberForm();
                  console.log(bool);
@@ -351,7 +380,7 @@ ListController.prototype = {
 
          else if(this._view._list.selector == '#subscription_table_body'){
                 
-            $(document).on('click','#edit_subscription',function(){
+            $(document).off().on('click','#edit_subscription',function(){
                 console.log("hello i am Subscription");
             var bool=validateSubscriptionForm();
             var service = $('#service_select').val();
@@ -387,19 +416,18 @@ function fillServiceList(){
 $(function(){
 
 
-    model1 = new SubscriberModel('DEFAULT',[],[]);
-	
+    model1 = new SubscriberModel('DEFAULT',[],[]);	
     var user1 = new UserModel('abc',model1,true);
     var user2 = new UserModel('xyz',model1,false);
     var user3 = new UserModel('pqr',model1,false);
-    
-    model_list_user = new ListModel([user1,user2,user3]);  
-    model_list = new ListModel(); 
+    model_list = new ListModel([model1]);
+    model_list_user = new ListModel();  
+     
 
     var service1 = new ServiceModel('Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.','SMS');
     model_list_service = new ListModel([service1]); 
 
-    var subscription1 = new SubscriptionModel('Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.','12/3/1999','10/1/2000');
+    var subscription1 = new SubscriptionModel('Base Tariff-Local Re.1 National Rs.1.50 International Rs.5.00.','12/3/1999','10/1/2000',model1);
     model_list_subscription = new ListModel([subscription1]);   
 
 

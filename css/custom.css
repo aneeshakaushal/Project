@@ -63,3 +63,14 @@ nav{
   color : gray;
   cursor: default; 
 }
+
+#subscription_data{
+  display: none;
+  font-size: 20px;
+}
+
+#subscriber_table tbody tr:first-child td.actions .glyphicon-trash,#subscriber_table tbody tr:first-child td.actions .glyphicon-edit,#subscriber_table tbody tr:first-child td.actions .glyphicon-trash:hover, #subscriber_table tbody tr:first-child td.actions.glyphicon-edit:hover{
+  color: grey;
+  cursor: default;
+};
+
