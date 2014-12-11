@@ -34,8 +34,8 @@ function validateSubscriptionForm(){
          $("#myAlert").addClass("in");
         return false;
     }
-    if(Date.parse(endDate) <= Date.parse(startDate)){
-      $("#myAlert").text("End date should be less than start date");
+    if(Date.parse(endDate) < Date.parse(startDate)){
+      $("#myAlert").text("End date should be greater than start date");
          $("#myAlert").addClass("in");
         return false;
     }
@@ -165,6 +165,7 @@ function extendSubscription(){
                  console.log(mom.format('MM/DD/YYYY')+"Hadd ho gyi ab");
             if($('input[name=extend]:checked', '#extension_form').val() == "months"){
                     $('.endDate',$row).text(mom.add(days,'months').format('MM/DD/YYYY'));
+                    
             }
             else{
                     $('.endDate',$row).text(mom.add(days,'days').format('MM/DD/YYYY'));
