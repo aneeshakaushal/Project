@@ -2,7 +2,7 @@
 function validateSubscriberForm() {
 
     var name = document.getElementById("name").value;
-    if (name == null || name =="") {
+    if (name == null || name.trim() =="") {
     	 $("#myAlert").text("Please enter name!");
          $("#myAlert").addClass("in");
         return false;
@@ -44,7 +44,7 @@ function validateSubscriptionForm(){
 
 function validateUserForm(){
     var name_user = $('#name_user').val();
-    if (name_user == null || name_user =="") {
+    if (name_user == null || name_user.trim() =="") {
          $("#myAlert").text("Please enter user name!");
          $("#myAlert").addClass("in");
         return false;
@@ -60,8 +60,8 @@ function validateUserForm(){
 function validateServiceForm() {
 
     var name = $('#name_service').val();
-    if (name == null || name =="") {
-       $("#myAlert").text("Please enter name!");
+    if (name == null || name.trim() =="") {
+       $("#myAlert").text("Please enter service name!");
          $("#myAlert").addClass("in");
         return false;
     }
@@ -124,6 +124,7 @@ function subscriptionData () {
 
 }
 
+
 function addingSubscriptions () {
     // body...
     $('table').on('click', 'tr .name', function(){
@@ -138,11 +139,70 @@ function addingSubscriptions () {
     $('#view_subscription').addClass('active');
     $('#view_details').removeClass('active');
     });
+   
+}
 
-    $('#view_details').click(function(){
-         $('#details').addClass('active').addClass('in');
-         $('#subscri').removeClass('active').removeClass('in');
-        $('#view_subscription').removeClass('active');
+function fillingForm(){
+
+   $('table').on('click', '.glyphicon.glyphicon-edit', function(){   
+
+
+       console.log("clicked");
+       
+        var id= $(this).attr("class").substr(0,$(this).attr("class").length - 25);
+        var $row = $(this).closest('tr');
+        //$(".save").attr('value', 'Edit');
+
+      if(id == "subscription"){
+            $('#subscription_form').show();            
+        }
+        else{
+           $("#"+id+"-panel").show();  
+         } 
+       
+        
+
+        if(id == "subscription"){
+            $("#save_subscription").val('Edit');
+            $('#save_subscription').attr('id',"edit_subscription");
+            console.log($('#edit_subscription').val());
+            $('#service_select').val($('.serviceName',$row).text()).change();
+            $('#startDate').val($('.startDate',$row).text());
+            $('#endDate').val($('.endDate',$row).text());
+        }
+       else if(id=="subscriber"){
+            //console.log("subscriber"); 
+            $("#save").val('Edit');  
+            $('#save').attr('id',"edit");
+            console.log($('#edit').val());     
+            $('#name').val($('.name',$row).text());
+       }
+       else if(id=="user"){
+            console.log("user");
+            $("#save_user").val('Edit');
+            $('#save_user').attr('id',"edit_user");
+            console.log($('#edit_user').val());
+            $('#name_user').val($('.userName',$row).text());
+            $('#subscriber_select').val($('.subscriberName',$row).text()).change();//
+            if($('.admin',$row).text()=="true"){
+                $('#admin').prop('checked',true);
+            }
+            else{
+                $('#admin').prop('checked',false);
+            }
+       }
+       else{
+            console.log("service");
+            $("#save_service").val('Edit');
+            $('#save_service').attr('id',"edit_service");
+            console.log($('#edit_service').val());
+        $('#name_service').val($('.service',$row).text());
+        $('#product').val($('.product',$row).text()).change();
+         $('#market').val($("#market option:first").val()).change();
+       }
+
+
+       
     });
 }
 
@@ -164,11 +224,26 @@ function extendSubscription(){
                  var mom = new moment(oldDate,'MM-DD-YYYY');
                  console.log(mom.format('MM/DD/YYYY')+"Hadd ho gyi ab");
             if($('input[name=extend]:checked', '#extension_form').val() == "months"){
-                    $('.endDate',$row).text(mom.add(days,'months').format('MM/DD/YYYY'));
-                    
+                   
+                        var $added_date = mom.add(days,'months').format('MM/DD/YYYY');
+                        if($added_date == "-NaN/-NaN/-0NaN")
+                            {
+                                $("#myAlert").text("Please enter valid data");
+                                $("#myAlert").addClass("in");
+                                return false;
+                            }
+                    $('.endDate',$row).text($added_date); 
+
             }
             else{
-                    $('.endDate',$row).text(mom.add(days,'days').format('MM/DD/YYYY'));
+                    var $added_date = mom.add(days,'days').format('MM/DD/YYYY');
+                        if($added_date == "-NaN/-NaN/-0NaN")
+                            {
+                                $("#myAlert").text("Please enter valid data");
+                                $("#myAlert").addClass("in");
+                                return false;
+                            }
+                    $('.endDate',$row).text($added_date);
             }
 
 
@@ -183,58 +258,10 @@ $(function() {
     /*Subscriber Subscription relationship*/
     addingSubscriptions();
 
+
+
     /*Filling form */
-    $('table').on('click', '.glyphicon.glyphicon-edit', function(){               
-        console.log("clicked");
-       
-        var id= $(this).attr("class").substr(0,$(this).attr("class").length - 25);
-        var $row = $(this).closest('tr');
-         $(".save").attr('value', 'Edit');
-
-        if(id == "subscription"){
-            $('#subscription_form').show();            
-        }
-     
-        $("#"+id+"-panel").show();  
-        
-
-        if(id == "subscription"){
-            $('#save_subscription').attr('id',"edit_subscription");
-            console.log($('#edit_subscription').val());
-            $('#service_select').val($('.serviceName',$row).text()).change();
-            $('#startDate').val($('.startDate',$row).text());
-            $('#endDate').val($('.endDate',$row).text());
-        }
-       else if(id=="subscriber"){
-            //console.log("subscriber");   
-            $('#save').attr('id',"edit");
-            console.log($('#edit').val());     
-            $('#name').val($('.name',$row).text());
-       }
-       else if(id=="user"){
-            console.log("user");
-            $('#save_user').attr('id',"edit_user");
-            console.log($('#edit_user').val());
-            $('#name_user').val($('.userName',$row).text());
-            $('#subscriber_select').val($('.subscriberName',$row).text()).change();//
-            if($('.admin',$row).text()=="true"){
-                $('#admin').prop('checked',true);
-            }
-            else{
-                $('#admin').prop('checked',false);
-            }
-       }
-       else{
-            console.log("service");
-            $('#save_service').attr('id',"edit_service");
-            console.log($('#edit_service').val());
-        $('#name_service').val($('.service',$row).text());
-        $('#product').val($('.product',$row).text()).change();
-         $('#market').val($("#market option:first").val()).change();
-       }
-        
-       
-    });
+   fillingForm();
 
 
    	$( ".datepicker" ).datepicker();

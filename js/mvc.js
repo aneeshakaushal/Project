@@ -327,7 +327,7 @@ ListController.prototype = {
         if(this._view._list.selector == '#subscriber_table_body'){
             if(index == 0)
                 {
-                    alert("Cant edit deafault");
+                    alert("Cant edit default");
                     return ;
                 }
         $(document).off().on('click','#edit',function(){
@@ -377,10 +377,8 @@ ListController.prototype = {
             });
 
         }
-
-         else if(this._view._list.selector == '#subscription_table_body'){
-                
-            $(document).off().on('click','#edit_subscription',function(){
+        else{
+           $(document).off('click','#edit_subscription').on('click','#edit_subscription',function(){
                 console.log("hello i am Subscription");
             var bool=validateSubscriptionForm();
             var service = $('#service_select').val();
@@ -389,12 +387,8 @@ ListController.prototype = {
             if (bool == true) {
                 model_list_subscription.replaceItem(index,new SubscriptionModel(service,startDate,endDate));
             }
-        
             });
-
-        }
-
-        
+        }        
     }
 
 };
