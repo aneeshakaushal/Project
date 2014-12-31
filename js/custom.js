@@ -1,5 +1,6 @@
 
 function validateSubscriberForm() {
+  
 
     var name = document.getElementById("name").value;
     if (name == null || name.trim() =="") {
@@ -252,6 +253,10 @@ function extendSubscription(){
 }
 
 $(function() { 
+
+     $("#arrow-right").click(function(){
+        $("#side_bar").toggle();
+    });
     /*Displaying data from susbscription table*/
     subscriptionData();
 
@@ -265,10 +270,10 @@ $(function() {
 
 
    	$( ".datepicker" ).datepicker();
+
 	$("#date").text(moment().format('MMMM Do YYYY, h:mm:ss a')); 
-    $("#arrow-right").click(function(){
-        $("#side_bar").toggle();
-    });
+  
+   
     
     toggleForm();
 
@@ -279,11 +284,11 @@ $(function() {
         $('#cssmenu ul li').removeClass('active');
         $(this).addClass('active');
 
-        $( "#cssmenu ul li" ).each(function( index ) {
+       /* $( "#cssmenu ul li" ).each(function( index ) {
           $($(this).children("a").attr('href')).css("display","none");
 });
         $($(this).children("a").attr('href')).css("display","block");
-
+*/
     });
 
 
@@ -296,24 +301,6 @@ $(function() {
 
 
 
-    view = new ListView(model_list, {'list': $('#subscriber_table_body'), 'editButton' : '.glyphicon.glyphicon-edit', 'addButton' : '#save' ,'delButton': '.delete_subscriber','template':$('#template'),'count':$('#subscriber_count')}); //new listView(model,elements)
-    var controller = new ListController(model_list, view);
-    view.show();
-    
-    
-   view_user = new ListView(model_list_user, {'list': $('#user_table_body'), 'editButton' : '.glyphicon.glyphicon-edit', 'addButton' : '#save_user' ,'delButton':'.delete_user','template':$('#template_user'),'count':$('#user_count')}); //new listView(model,elements)
-    var controller_user = new ListController(model_list_user, view_user);
-    view_user.show();
-
-    
-    view_service = new ListView(model_list_service, {'list': $('#service_table_body'), 'editButton' : '.glyphicon.glyphicon-edit','addButton' : '#save_service' ,'delButton': '.delete_service','template':$('#template_service'),'count': $('#service_count')}); //new listView(model,elements)
-    var controller_service = new ListController(model_list_service, view_service);
-    view_service.show();
-
-   
-   view_subscription = new ListView(model_list_subscription, {'list': $('#subscription_table_body'), 'editButton' : '.glyphicon.glyphicon-edit','addButton' : '#save_subscription' ,'delButton': '.delete_subscription','template':$('#template_subscription'),'count':$('#subscription_count')}); //new listView(model,elements)
-    var controller_subscription = new ListController(model_list_subscription, view_subscription);
-    view_subscription.show();
  }
 
 

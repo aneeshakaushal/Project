@@ -54,10 +54,10 @@ nav{
 }
 
 .tab-panels,#subscription_form{
-    display: none;
+   /* display: none;*/
 }
 #services,#users{
-    display: none;
+    /*display: none;*/
 }
 .default,.default:hover{
   color : gray;

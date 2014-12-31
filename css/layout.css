@@ -146,7 +146,7 @@ color: #fff;
 
 /*form css*/
 
-form{ 
+.formcss{ 
   border:2px dashed;
   padding: 20px;
    font-family: "ITCLubalinGraphBook",Rockwell,"Trebuchet MS","Gill Sans",Lucida Grande,Arial,sans-serif;
@@ -154,7 +154,7 @@ form{
 }
 
 
-form .box
+.formcss .box
 {background: transparent url("../images/bg-input-std-left.png") no-repeat scroll right top;
 width:100%;
 border:5px solid #2676a2;
