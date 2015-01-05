@@ -1,6 +1,5 @@
 
-function validateSubscriberForm() {
-  
+function validateSubscriberForm() { 
 
     var name = document.getElementById("name").value;
     if (name == null || name.trim() =="") {
@@ -70,60 +69,53 @@ function validateServiceForm() {
 }
 
 function toggleForm(){
-    $('.glyphicon.glyphicon-plus').click(function(){
+  
+    $(document).on('click', '.glyphicon.glyphicon-plus', function(){ 
 
-        $('#subscription_data').hide();
+        $('#subscription_data').hide(); 
+
         var id= this.id.substr(0,this.id.length - 4);        
+          $("#"+id+"-panel").show();
         
+
+
         if(id == "subscription"){
-            $('#edit_subscription').attr('id',"save_subscription");
-            $('#subscription_form').show();
-            $('#service_select').val($("#service_select option:first").val()).change();
+             $("#save_subscription").show();
+             $('#edit_subscription').hide();
+             $('#service_select').val($("#service_select option:first").val()).change();
             $('#startDate').val("");
             $('#endDate').val("");
-        }
-        $("#"+id+"-panel").show();
-        $(".save").attr('value', 'Save');
+        }     
+       
+
         if(id=="subscriber"){
             //console.log("subscriber");   
-            $('#edit').attr('id',"save");     
+            $("#save").show();
+            $('#edit').hide();
             $('#name').val("");
        }
        else if(id=="service"){
         console.log("service");
-        $('#edit_service').attr('id',"save_service");
+        $("#save_service").show();
+        $('#edit_service').hide();
         $('#name_service').val("");
         $('#product').val($("#product option:first").val()).change();
         $('#market').val($("#market option:first").val()).change();
        }
        else if(id=="user"){
-            console.log("user");
-            $('#edit_user').attr('id',"save_user");
+            console.log("user hii");
+            $("#save_user").show();
+            $('#edit_user').hide();
             $('#name_user').val("");
             $('#subscriber_select').val($('#subscriber_select option:first').val()).change();
             $('#admin').prop('checked',false);
        }
        else{
 
-       } 
+       }  
     });
 }
 
-function subscriptionData () {
-    // body...
-     $('table').on('click', '.glyphicon.glyphicon-th-list', function(){ 
-            console.log("this is view");
-            $('#subscription_form').hide();
-            $('#subscription_data').show();
-
-            var $row = $(this).closest('tr');
-            $('#serNam').text($('.serviceName',$row).text());
-            $('#sd').text($('.startDate',$row).text());
-            $('#ed').text($('.endDate',$row).text());
-
-      });
-
-}
 
 
 function addingSubscriptions () {
@@ -208,7 +200,6 @@ function fillingForm(){
 }
 
 function extendSubscription(){
-    $('table').on('click', '.endDate', function(){
         
         var $row = $(this).closest('tr');
         console.log("CLICKED EXTENSION");
@@ -249,16 +240,17 @@ function extendSubscription(){
 
 
         });
-    });
+
 }
 
 $(function() { 
 
-     $("#arrow-right").click(function(){
-        $("#side_bar").toggle();
+     $(document).on('click', '#arrow-right', function(){ 
+            $("#side_bar").toggle();
     });
-    /*Displaying data from susbscription table*/
-    subscriptionData();
+
+
+ 
 
     /*Subscriber Subscription relationship*/
     addingSubscriptions();
@@ -270,9 +262,7 @@ $(function() {
 
 
    	$( ".datepicker" ).datepicker();
-
 	$("#date").text(moment().format('MMMM Do YYYY, h:mm:ss a')); 
-  
    
     
     toggleForm();
@@ -291,8 +281,7 @@ $(function() {
 */
     });
 
-
-    $("input").focusout(function(){
+    $(document).on('focusout', 'input', function(){    
     if ($(this).val().length != 0){
         $("#myAlert").removeClass("in");
 

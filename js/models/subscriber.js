@@ -6,7 +6,7 @@ App.Subscriber = DS.Model.extend({
 
 App.Subscriber.FIXTURES = [{
    id: 1,
-   name : 'Aneesha',
+   name : 'DEFAULT',
    users : [1,2],
    subscriptions : [1]
    

@@ -53,12 +53,10 @@ nav{
     cursor: pointer;
 }
 
-.tab-panels,#subscription_form{
-   /* display: none;*/
+.tab-panels{
+   display: none;
 }
-#services,#users{
-    /*display: none;*/
-}
+
 .default,.default:hover{
   color : gray;
   cursor: default; 
@@ -74,3 +72,6 @@ nav{
   cursor: default;
 };
 
+.linkto{
+  font-size: 1000px;
+}

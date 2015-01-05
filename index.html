@@ -5,22 +5,16 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/layout.css">
 	<link rel="stylesheet" type="text/css" href="css/table.css">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">	
 	<script type="text/javascript" src="js/respond.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css"/>
-<link href="js/select2-3.5.2/select2.css" rel="stylesheet"/>
-<link href="js/select2-3.5.2/select2-bootstrap.css" rel="stylesheet">
+	<link href="js/select2-3.5.2/select2.css" rel="stylesheet"/>
+	<link href="js/select2-3.5.2/select2-bootstrap.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
 </head>
 	
 <body>
-
 	<!-- Header with bootstrap navbar -->
-
-
-
-
-
  <script type="text/x-handlebars" id="application">
 
 
@@ -51,7 +45,6 @@
 	</nav>	
 			<article class="col-lg-9 col-sm-8 col-xs-10 col-lg-push-1 col-sm-push-4 col-xs-push-2" >
 			{{outlet}}
-
 			</article>			
 			<aside id="side_bar">
 			<div id='cssmenu'>
@@ -75,86 +68,29 @@
 
 <script type="text/x-handlebars" id="subscriber">
 			<h1>Subscriber</h1>
+			<div id="subscriber-panel" class="tab-panels">
+				<ul class="nav tabs">  <!-- tabs -->
+					<li id="view_details" class="active"><A HREF="#details" data-toggle="tab">Details</A></li>
+					<li id="view_subscription"><A HREF="#/subscriber" >Subscription </A></li>
+				</ul>
 
-{{view "select"
-       content=programmers class="box"
-       optionValuePath="content.id"
-       optionLabelPath="content.name"}}
-		<div id="subscriber-panel" class="tab-panels">
-			<ul class="nav tabs">  <!-- tabs -->
-				<li id="view_details" class="active"><A HREF="#details" data-toggle="tab">Details</A></li>
-				<li id="view_subscription"><A HREF="#" >Subscription </A></li>
-			</ul>
-
-			<div class="tab-content">
-					<div id="details" class="tab-pane fade active in panel">	<!-- panel -->			
-						<div id="subscriber_form">
-							<div class="formcss">					
-							{{input  type="text"  class="box" id="name" placeholder="Subscriber Name :" value=newSubscriber action="createSubscriber"}}</br></br>
-							<input {{action "createSubscriber"}} class="btn2 save" id="save" type="button" value="Save">
-							
+				<div class="tab-content">
+						<div id="details" class="tab-pane fade active in panel">	<!-- panel -->			
+							<div id="subscriber_form">
+								<div class="formcss">					
+								{{input  type="text"  class="box" id="name" placeholder="Subscriber Name :" value=newSubscriber action="createSubscriber"}}</br></br>
+								<input {{action "createSubscriber"}} class="btn2 save" id="save" type="button" value="Save">
+								<input style="display:none" class="btn2 save" id="edit" type="button" value="Edit">							
+								</div>
 							</div>
-						</div>
-					</div>
-				<div id="subscri" class="tab-pane fade panel">
-					<div id="subscription_form" >
-						<form action="" id="form1" onSubmit="return validateSubscriptionForm()">
-						Service : 
-						<select id="service_select" class="box" >
-						</select>
-						</br></br>
-						<input id="startDate" class="box datepicker" type="text" placeholder="Start Date :"></p>
-						<input id="endDate" class="box datepicker" type="text" placeholder="End Date :"></p> 
-						<input class="btn2 save" id="save_subscription" type="button" value="Save">
-						
-						</form>
-					</div>
-					<div id="subscription_data">
-	
-						Service Name : <span id="serNam"></span><br>
-						Start Date    :<span id="sd"></span><br>
-						End Date : <span id="ed"></span><br>
-
-					</div>
-					</br><span id="subscription-add" class="glyphicon glyphicon-plus"></span>
-						<br>
-					 <div id="subscription_table">						
-						<table size=10 class="table table-bordered">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Start Date</th>
-									<th>End Date</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody id="subscription_table_body"> 
-								{{#each _items}}
-		<tr><td class="serviceName">{{name}}</td><td class="startDate">{{startDate}}</td><td class="endDate">{{endDate}}</td>
-			<td class="actions">
-				&nbsp;<span class="subscription glyphicon glyphicon-edit"></span>
-				&nbsp;&nbsp;<span {{action "deleteSubscription" subscription}}class="delete_subscription"><span class="glyphicon glyphicon-trash "></span></span>
-				&nbsp;&nbsp;<span class="glyphicon glyphicon-th-list"></span>
-				</td>
-		</tr>
-	{{/each}}	
-							 </tbody>
-							</table>							
-					</div>
-					<div id="extension" style="display:none">
-							<form id="extension_form" action="" method="post" style="border:none;background : #dad671">
-	 							<h5>Do You want to extend Days or months?</h5>
-								<input type="radio" name="extend" value="days" checked="checked">Days
-								<input type="radio" name="extend" value="months">Months<br>
-								<input type="text" id="unit">
-								<button id="days" type="button" value="Ok">Ok</button>
-							</form>
-
-					</div>        
-				</div>
+						</div>				
+					</br>
+					{{outlet}}
+			    </div>		   
 			</div>
-			</br>
-		</div>
+
+
+
 <span id="subscriber-add" class="glyphicon glyphicon-plus"></span><br>
 <div id="subscriber_table">	
 <table  size=10 class="table table-bordered">				
@@ -170,17 +106,93 @@
 <tbody id="subscriber_table_body">
 
 	{{#each subscriber in model}}
-		<tr><td class="name">{{subscriber.name}}</td><td class="userLength">{{subscriber.users.length}}</td><td class="subscriptionList">{{subscriber.subscriptions.length}}</td>
-		
+	
+		<tr {{action "sendId" subscriber}} >
+		{{#link-to 'subscription'}}<td  class="name">{{subscriber.name}}</td>{{/link-to}}<td class="userLength">{{subscriber.users.length}}</td><td class="subscriptionList">
+		{{subscriber.subscriptions.length}}</td>		
 		<td class="actions">&nbsp;<span {{action "editSubscriber" subscriber}}class="subscriber glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
 		<span {{action "deleteSubscriber" subscriber}} class="delete_subscriber"><span class="glyphicon glyphicon-trash"></span></span>&nbsp;&nbsp;&nbsp;</td></tr>
+	
 	{{/each}}
 
-	
+	{{outlet}}
+
 </tbody>
 </table>	
 </div>
 
+</script>
+
+
+<script type="text/x-handlebars" id="subscription">
+
+<h1>Subscription</h1>
+<div id="subscription-panel" class="tab-panels">
+				<ul class="nav tabs">  <!-- tabs -->
+					<li id="view_details" >{{#link-to "subscriber"}}Details{{/link-to}}</li>
+					<li id="view_subscription" class="active"><A> Subscription</a></li>
+				</ul>
+
+				<div class="tab-content">
+						<div id="subscri" class="tab-pane fade active in panel">	<!-- panel -->			
+							<div id="subscription_form" >
+								<div class="formcss">	
+									Service : 
+									{{view "select" content=services class="box" optionValuePath="content.id" optionLabelPath="content.name" id="service_select"}}						
+									</br></br>
+									<input id="startDate" class="box datepicker" type="text" placeholder="Start Date :"></p>
+									<input id="endDate" class="box datepicker" type="text" placeholder="End Date :"></p> 
+									<input {{action "createSubscription"}} class="btn2 save" id="save_subscription" type="button" value="Save">
+									<input style="display:none" class="btn2 save" id="edit_subscription" type="button" value="Edit">	
+								</div>
+							</div>	
+							<div id="subscription_data">	
+								Service Name : <span id="serNam"></span><br>
+								Start Date    :<span id="sd"></span><br>
+								End Date : <span id="ed"></span><br>
+							</div>
+						</div>			
+					</br>
+					{{outlet}}
+			    </div>		   
+</div>
+
+
+
+<span id="subscription-add" class="glyphicon glyphicon-plus"></span><br>			
+<div id="subscription_table">						
+						<table size=10 class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Start Date</th>
+									<th>End Date</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody id="subscription_table_body"> 
+								{{#each subscription in model}}
+									<tr><td class="serviceName">{{subscription.service.name}}</td><td class="startDate">{{subscription.startDate}}</td><td {{action "extendSubscription" }}class="endDate">{{subscription.endDate}}</td>
+									<td class="actions">
+									&nbsp;<span {{action "editSubscription" subscription}}class="subscription glyphicon glyphicon-edit"></span>
+									&nbsp;&nbsp;<span {{action "deleteSubscription" subscription}}class="delete_subscription"><span class="glyphicon glyphicon-trash "></span></span>
+									&nbsp;&nbsp;<span {{action "viewSubscription" subscription}} class="glyphicon glyphicon-th-list"></span>
+									</td>
+									</tr>
+								{{/each}}	
+							</tbody>
+						</table>							
+					</div>
+					<div id="extension" style="display:none">
+							<form id="extension_form" action="" method="post" style="border:none;background : #dad671">
+	 							<h5>Do You want to extend Days or months?</h5>
+								<input type="radio" name="extend" value="days" checked="checked">Days
+								<input type="radio" name="extend" value="months">Months<br>
+								<input type="text" id="unit">
+								<button id="days" type="button" value="Ok">Ok</button>
+							</form>
+
+					</div> 
 </script>
 
 <script  type="text/x-handlebars" id="users">
@@ -193,7 +205,7 @@
 			<div id="user_form">
 			
 							<div class="formcss">
-							{{input  type="text"  class="box" id="user_name" placeholder="User Name :" value=newUser action="createUser"}}
+							{{input  type="text"  class="box" id="name_user" placeholder="User Name :" value=newUser action="createUser"}}
 							</br></br>
 							Subscriber : 								
 
@@ -201,12 +213,14 @@
        content=programmers class="box"
        optionValuePath="content.id"
        optionLabelPath="content.name"
+
    		id="subscriber_select"}}
 
 								
 								</br></br>
 								Admin : <input  id="admin" type="checkbox"></br> </br>
 								<input {{action "createUser"}} class="btn2 save" id="save_user" type="button" value="Save">
+								<input style="display:none" class="btn2 save" id="edit_user" type="button" value="Edit">
 							</div>
 
 			</div>
@@ -241,7 +255,7 @@
 <script type="text/x-handlebars" id="services">
 	<div id="services">
 	<h1>Services</h1>
-			<div id="service-panel"class="tab-panels">
+			<div id="service-panel" class="tab-panels">
 		<ul class="tabs">
 			<li class="active">Details</li>		
 		</ul>
@@ -249,7 +263,7 @@
 			<div id="service_form">
 				<div class="formcss">
 				{{input  type="text"  class="box" id="name_service" placeholder="Service Name :" value=newService action="createService"}}</br></br>
-			
+				
 				Product : 
 				<select id="product" class="box">
 					<option>Calls</option>
@@ -298,6 +312,7 @@ Market :
     </select></br></br>
 				
 				<input {{action "createService"}} class="btn2 save" id="save_service" type="button" value="SAVE">
+				<input class="btn2 save" style="display:none" id="edit_service" type="button" value="Edit">
 				</div>
 			</div>
 		</div>	
@@ -318,7 +333,7 @@ Market :
 	<tbody id="service_table_body">
 		{{#each service in model}}
 		<tr><td class="service">{{service.name}}</td><td class="product">{{service.product}}</td><td class="actions">&nbsp;
-		<span class="service glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<span {{action "editService" service}} class="service glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
 		<span {{action "deleteService" service}}class="delete_service"><span class="glyphicon glyphicon-trash "></span></span>&nbsp;&nbsp;&nbsp;</td></tr>
 	{{/each}}
 	</tbody>	
@@ -328,12 +343,18 @@ Market :
 
 
 	<!-- javascript -->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-	<script type="text/javascript" src="js/underscore.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/select2-3.5.2/select2.js"></script>
 	<script type="text/javascript" src="js/moment.min.js"></script>
 	<!--<script type="text/javascript" src="js/mvc.js"></script> -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		//alert("Hello")
+		$("select").select2({
+		});
+		
+	});</script>
 
 	<script src="js/libs/handlebars-v1.3.0.js"></script>
 	
@@ -344,7 +365,7 @@ Market :
   	<script src="tests/runner.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script src="js/app.js"></script>
-<script type="text/javascript" src="js/custom.js"></script>
+
 <script src="js/router.js"></script>
 <script src="js/models/service.js"></script>
 <script src="js/models/subscriber.js"></script>
@@ -355,19 +376,14 @@ Market :
 <script type="text/javascript" src="js/controllers/service_controller.js"></script>
 <script type="text/javascript" src="js/controllers/user_controller.js"></script>
 <script type="text/javascript" src="js/controllers/subscription_controller.js"></script>
-	<script id="select_template" type="text/x-handlebars-template">
+	
+<script id="select_template" type="text/x-handlebars-template">
 						{{#each _items}}
 						<option>{{name}}</option>
 						{{/each}}
 	</script>
-	 
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$("select").select2({
-		});
-		
-	});</script>
-
+	 <script type="text/javascript" src="js/custom.js"></script>
+	
 
 </body>
 
