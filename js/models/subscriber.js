@@ -4,7 +4,9 @@ App.Subscriber = DS.Model.extend({
 	subscriptions : DS.hasMany('subscription')
 });
 
-App.Subscriber.FIXTURES = [{
+App.Subscriber.reopenClass({
+   FIXTURES : [
+   {
    id: 1,
    name : 'DEFAULT',
    users : [1,2],
@@ -17,5 +19,7 @@ App.Subscriber.FIXTURES = [{
    users : [3],
    subscriptions : [2]
  }]
+
+});
 
  

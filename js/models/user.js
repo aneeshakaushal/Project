@@ -4,7 +4,8 @@ App.User = DS.Model.extend({
    admin : DS.attr('boolean')
 });
 
-App.User.FIXTURES = [
+App.User.reopenClass({
+   FIXTURES : [
  {
    id: 1,
    name : 'User1',
@@ -22,4 +23,5 @@ App.User.FIXTURES = [
    subscriber : 2,
    admin : true
  }
-];
+]
+});

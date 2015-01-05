@@ -5,11 +5,13 @@ App.Subscription = DS.Model.extend({
    subscriber : DS.belongsTo('subscriber')
 });
 
-App.Subscription.FIXTURES = [
+App.Subscription.reopenClass({
+   FIXTURES : [
  {
    id: 1,
    service : 1,
    startDate : "12/2/2013",
    endDate : "12/4/2013"   
  }
-];
+]
+});

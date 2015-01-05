@@ -4,11 +4,13 @@ App.Service = DS.Model.extend({
    market : DS.attr('string')
 });
 
-App.Service.FIXTURES = [
+App.Service.reopenClass({
+   FIXTURES : [
  {
    id: 1,
    name : 'Service1',
    product : 'Calls',
    market : 'Chandigarh' 
  }
-];
+]
+});

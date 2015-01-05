@@ -45,7 +45,10 @@ App.UsersController = Ember.ObjectController.extend({
 	 }.property(),
 
 	 deleteUser : function(user){
-			user.destroyRecord();
+			user.deleteRecord();
+			this.store.dematerializeRecord(user);
+			user.save();
+
 
 	},
 

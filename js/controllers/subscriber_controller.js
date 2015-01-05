@@ -3,7 +3,7 @@ var index_subscriber = 3;
 var current_subscriber = 1;
 
 App.SubscriberController = Ember.ObjectController.extend({
-	needs : 'users',
+	needs : ['users','subscriber'],
 	actions : {
 		createSubscriber : function(){	
 			var title = this.get('newSubscriber');
@@ -39,20 +39,24 @@ App.SubscriberController = Ember.ObjectController.extend({
 				
 				users.forEach(function(item, index) {
  						/*item.set('subscriber',*/
+ 							
  							var sub = self.get('controllers.subscriber').findSubscriber(1);
- 							item.set('subscriber',sub);
- 							item.set('name',"Assssssss");
- 							console.log(item.get('subscriber').get('name'));
- 							item.save();
+ 							if(item.get('subscriber').get('id') != 1){
+ 								item.set('subscriber',sub);
+ 								item.set('name',"Assssssss");
+ 								console.log(item.get('subscriber').get('name'));
+ 								item.save();
+ 							}
+ 							
  					});
 
 				subscriber.deleteRecord();
+				this.store.dematerializeRecord(subscriber);
 				subscriber.save();
 
-		
 
-
-	},
+	}
+},
 
 		editSubscriber : function(subscriber){
 			//filling the form 
@@ -86,10 +90,9 @@ App.SubscriberController = Ember.ObjectController.extend({
 	},
 		findSubscriber : function(id_selected){
 			var sub =  this.store.all('subscriber');
-			console.log(sub.objectAt(id_selected-1));
-			console.log(sub.objectAt(id_selected-1).get('users'));
 			return sub.objectAt(id_selected-1);
 		},
+		
 		hello : function(){
 			console.log("Hello")			
 		},
