@@ -8,7 +8,7 @@ App.Service.reopenClass({
    FIXTURES : [
  {
    id: 1,
-   name : 'Service1',
+   name : 'DEFAULT_SERVICE',
    product : 'Calls',
    market : 'Chandigarh' 
  }

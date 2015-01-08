@@ -49,12 +49,12 @@
 			<aside id="side_bar">
 			<div id='cssmenu'>
 				<ul class="nav nav-pills nav-stacked hidden-xs">
-				   <li id="view" class="active">{{#link-to 'subscriber'}}Subscriber <span id="subscriber_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> {{/link-to}}</li>
+				   <li id="view">{{#link-to 'subscriber'}}Subscriber <span id="subscriber_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-folder-close"></span> {{/link-to}}</li>
 				   <li id="view_user">{{#link-to 'users'}}Users <span id="user_count"></span>&ensp;&ensp;<span class=" pull-right glyphicon glyphicon-user"></span>{{/link-to}}</li>
 				   <li id="view_service">{{#link-to 'services'}}Services <span id="service_count"></span>&ensp;&ensp;<span class="pull-right glyphicon glyphicon-flash"></span>{{/link-to}}</li>   
 				</ul>
 		`		<ul class=" nav nav-pills nav-stacked visible-xs" id="#icon_bar">
-						 <li class="active">{{#link-to 'subscriber'}}<span class="glyphicon glyphicon-folder-close"></span> {{/link-to}}</li>
+						 <li>{{#link-to 'subscriber'}}<span class="glyphicon glyphicon-folder-close"></span> {{/link-to}}</li>
 				   		<li>{{#link-to 'users'}}<span class="glyphicon glyphicon-user"></span>{{/link-to}}</li>
 				  		 <li>{{#link-to 'services'}}<span class="glyphicon glyphicon-flash"></span>{{/link-to}}</li>   
 					</ul>
@@ -62,12 +62,11 @@
 			</div>
 		</aside>
 
-
   </script>
 
 
 <script type="text/x-handlebars" id="subscriber">
-			<h1>Subscriber</h1>
+			<h1>Subscriber {{count_subscriber}}</h1>
 			<div id="subscriber-panel" class="tab-panels">
 				<ul class="nav tabs">  <!-- tabs -->
 					<li id="view_details" class="active"><A HREF="#details" data-toggle="tab">Details</A></li>
@@ -108,7 +107,7 @@
 	{{#each subscriber in model}}
 	
 		<tr {{action "sendId" subscriber}} >
-		{{#link-to 'subscription'}}<td  class="name">{{subscriber.name}}</td>{{/link-to}}<td class="userLength">{{subscriber.users.length}}</td><td class="subscriptionList">
+		<td id="subname" class="name">{{#link-to 'subscription'}}{{subscriber.name}}</td>{{/link-to}}<td class="userLength">{{subscriber.users.length}}</td><td class="subscriptionList">
 		{{subscriber.subscriptions.length}}</td>		
 		<td class="actions">&nbsp;<span {{action "editSubscriber" subscriber}}class="subscriber glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
 		<span {{action "deleteSubscriber" subscriber}} class="delete_subscriber"><span class="glyphicon glyphicon-trash"></span></span>&nbsp;&nbsp;&nbsp;</td></tr>
@@ -140,7 +139,7 @@
 									Service : 
 									{{view "select" content=services class="box" optionValuePath="content.id" optionLabelPath="content.name" id="service_select"}}						
 									</br></br>
-									<input id="startDate" class="box datepicker" type="text" placeholder="Start Date :"></p>
+									<input id="startDate" {{action "addPicker" on="mouseEnter"}}class="box datepicker" type="text" placeholder="Start Date :"></p>
 									<input id="endDate" class="box datepicker" type="text" placeholder="End Date :"></p> 
 									<input {{action "createSubscription"}} class="btn2 save" id="save_subscription" type="button" value="Save">
 									<input style="display:none" class="btn2 save" id="edit_subscription" type="button" value="Edit">	
@@ -158,9 +157,20 @@
 </div>
 
 
+<div id="extension" style="display:none;width : 200px">
+							<form id="extension_form" action="" method="post" style="border:none;background : #dad671">
+	 							<h5>Do You want to extend Days or months?</h5>
+								<input type="radio" name="extend" value="days" checked="checked">Days
+								<input type="radio" name="extend" value="months">Months<br>
+								<input type="text" id="unit">
+								<button id="days" type="button" value="Ok">Ok</button>
+							</form>
+
+</div> 
 
 <span id="subscription-add" class="glyphicon glyphicon-plus"></span><br>			
 <div id="subscription_table">						
+						
 						<table size=10 class="table table-bordered">
 							<thead>
 								<tr>
@@ -172,7 +182,7 @@
 							</thead>
 							<tbody id="subscription_table_body"> 
 								{{#each subscription in model}}
-									<tr><td class="serviceName">{{subscription.service.name}}</td><td class="startDate">{{subscription.startDate}}</td><td {{action "extendSubscription" }}class="endDate">{{subscription.endDate}}</td>
+									<tr><td class="serviceName">{{subscription.service.name}}</td><td class="startDate">{{subscription.startDate}}</td><td {{action "extendSubscription" subscription }}class="endDate">{{subscription.endDate}}</td>
 									<td class="actions">
 									&nbsp;<span {{action "editSubscription" subscription}}class="subscription glyphicon glyphicon-edit"></span>
 									&nbsp;&nbsp;<span {{action "deleteSubscription" subscription}}class="delete_subscription"><span class="glyphicon glyphicon-trash "></span></span>
@@ -183,16 +193,7 @@
 							</tbody>
 						</table>							
 					</div>
-					<div id="extension" style="display:none">
-							<form id="extension_form" action="" method="post" style="border:none;background : #dad671">
-	 							<h5>Do You want to extend Days or months?</h5>
-								<input type="radio" name="extend" value="days" checked="checked">Days
-								<input type="radio" name="extend" value="months">Months<br>
-								<input type="text" id="unit">
-								<button id="days" type="button" value="Ok">Ok</button>
-							</form>
-
-					</div> 
+					
 </script>
 
 <script  type="text/x-handlebars" id="users">
@@ -213,7 +214,6 @@
        content=programmers class="box"
        optionValuePath="content.id"
        optionLabelPath="content.name"
-
    		id="subscriber_select"}}
 
 								
@@ -345,6 +345,7 @@ Market :
 	<!-- javascript -->
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/require.js"></script>
 	<script type="text/javascript" src="js/select2-3.5.2/select2.js"></script>
 	<script type="text/javascript" src="js/moment.min.js"></script>
 	<!--<script type="text/javascript" src="js/mvc.js"></script> -->
@@ -376,7 +377,7 @@ Market :
 <script type="text/javascript" src="js/controllers/service_controller.js"></script>
 <script type="text/javascript" src="js/controllers/user_controller.js"></script>
 <script type="text/javascript" src="js/controllers/subscription_controller.js"></script>
-	
+<script type="text/javascript" src="js/views/user_view.js"></script>	
 <script id="select_template" type="text/x-handlebars-template">
 						{{#each _items}}
 						<option>{{name}}</option>

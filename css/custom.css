@@ -75,3 +75,9 @@ nav{
 .linkto{
   font-size: 1000px;
 }
+
+
+#service_table tbody tr:first-child td.actions .glyphicon-trash,#service_table tbody tr:first-child td.actions .glyphicon-edit,#service_table tbody tr:first-child td.actions .glyphicon-trash:hover, #service_table tbody tr:first-child td.actions.glyphicon-edit:hover{
+  color: grey;
+  cursor: default;
+};

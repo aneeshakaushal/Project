@@ -1,6 +1,13 @@
-index_subscription = 2;
+index_subscription = 3;
 App.SubscriptionController = Ember.ObjectController.extend({
 	needs : ['services','subscriber'],
+
+	doSomething : function(){
+	/*$( ".datepicker" ).datepicker();
+	$("#date").text(moment().format('MMMM Do YYYY, h:mm:ss a'));*/
+
+	alert("hi")
+	}.on('ready'),
 	actions : {
 		createSubscription : function(){
 			var bool = validateSubscriptionForm();	
@@ -23,13 +30,26 @@ App.SubscriptionController = Ember.ObjectController.extend({
 				subscriber : subscriber_set
 
 			});
+
+			index_subscription++;
+      		
       		// Save the new model
       		subscription.save();
-      		index_subscription++;
+      		
 		},
 
-		deleteSubscription : function(subscription){			
+		deleteSubscription : function(subscription){		
+			
+			/*
+			subscription.deleteRecord();
+			subscription.save().then(function(){
+				subscriber.save();
+			});
+*/			var subscriber = subscription.get('subscriber');
+			subscriber.get('subscriptions').removeObject(subscription);
+			subscriber.save();
 			subscription.destroyRecord();
+			subscription.save();
 		},
 
 		editSubscription : function(subscription){
@@ -72,21 +92,84 @@ App.SubscriptionController = Ember.ObjectController.extend({
 	
 		//Displaying data of a subscription
 		viewSubscription : function(subscription){			
-			$(document).on('click', '.glyphicon.glyphicon-th-list', function(){ 
+			$(document).on('click', '.glyphicon.glyphicon-th-list', function(){
+			 $("#subscription-panel").show();
             $('#subscription_form').hide();
             $('#subscription_data').show();
-            $('#serNam').text(subscription.get('service').get('name'));
-            $('#sd').text(subscription.get('startDate'));
+            $('#serNam').text();
+            $('#sd').text(this.get('strt'));
             $('#ed').text(subscription.get('endDate'));
         });
 		
 		},
 
-		extendSubscription : function(){
-			extendSubscription();
-		}
+		extendSubscription : function(subscription){
+			 $('table').on('click', '.endDate', function(){
+        
+        var $row = $(this).closest('tr');
+        console.log("CLICKED EXTENSION");
+        $('#extension').css("display","block");
+       
+        $('#extension').off().on('click','#days',function(){
+                 var days = $('#unit').val();
+                 if(isNaN(days) == true){
+                     $("#myAlert").text("Please enter a number");
+                      $("#myAlert").addClass("in");
+                        return false;
+                 }
+                 var oldDate = $('.endDate',$row).text();
+                 var mom = new moment(oldDate,'MM-DD-YYYY');
+                 console.log(mom.format('MM/DD/YYYY')+"Hadd ho gyi ab");
+            if($('input[name=extend]:checked', '#extension_form').val() == "months"){
+                   
+                        var $added_date = mom.add(days,'months').format('MM/DD/YYYY');
+                        if($added_date == "-NaN/-NaN/-0NaN")
+                            {
+                                $("#myAlert").text("Please enter valid data");
+                                $("#myAlert").addClass("in");
+                                return false;
+                            }
+                    //$('.endDate',$row).text($added_date); 
+                    subscription.set('endDate',$added_date);
+
+            }
+            else{
+                    var $added_date = mom.add(days,'days').format('MM/DD/YYYY');
+                        if($added_date == "-NaN/-NaN/-0NaN")
+                            {
+                                $("#myAlert").text("Please enter valid data");
+                                $("#myAlert").addClass("in");
+                                return false;
+                            }
+                   // $('.endDate',$row).text($added_date);
+                   subscription.set('endDate',$added_date);
+            }
+
+            subscription.save();
+
+
+        });
+    });
+		},
+
+
+		addPicker : function(){
+			$( ".datepicker" ).datepicker();
+		},
+
+
 	},
 	services : function(){
 		return this.store.all('service')
-	}.property()
+	}.property(),
+
+	subs : function(){
+		return this.store.all('subscription')
+	},
+
+	findSubscription : function(id_selected){
+			var subscriptions =  this.store.all('subscription');
+			console.log(subscriptions.objectAt(id_selected-1));			
+			return subscriptions.objectAt(id_selected-1);
+		},
 });

@@ -1,7 +1,7 @@
-App.UserView = Ember.Select.extend({
+/*App.SubscriptionView = Ember.TextField.extend({
 	didInsertElement : function(){
-		this.$().focus();
+		console.log("Hello")
 	}
 });
-
-Ember.Handlebars.helper('edit-todo', Todos.EditTodoView);
+*/
+//Ember.Handlebars.helper('edit-todo', Todos.EditTodoView);

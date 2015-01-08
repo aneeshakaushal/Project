@@ -1,5 +1,5 @@
 var index_user = 4;
-
+var count_user = 3;
 App.UsersController = Ember.ObjectController.extend({
 	needs : 'subscriber',
 	actions : {
@@ -9,6 +9,7 @@ App.UsersController = Ember.ObjectController.extend({
 		
 			var subscriber_selected = this.get('controllers.subscriber').findSubscriber($('#subscriber_select').val());
 			var admin_value = $('#admin').prop('checked');
+			//console.log("Hello"+subscriber_selected.get('name'));
 
 			//call the validations ???
 			var bool = validateUserForm();
@@ -24,7 +25,8 @@ App.UsersController = Ember.ObjectController.extend({
 				id : index_user,
 				admin : admin_value,
 			});
-			
+			subscriber_selected.get("users").pushObject(user);
+			//App.store.commit();
 						
 
 			 // Clear the "New Todo" text field
@@ -32,7 +34,8 @@ App.UsersController = Ember.ObjectController.extend({
 
       		// Save the new model
       		user.save();
-
+      		count_user++; 
+      		$('#user_count').text('('+ (count_user) +')'); 
       		index_user++;
 		},
 
@@ -45,11 +48,17 @@ App.UsersController = Ember.ObjectController.extend({
 	 }.property(),
 
 	 deleteUser : function(user){
+	 	count_user--;
+			var subscriber = user.get('subscriber');
 			user.deleteRecord();
-			this.store.dematerializeRecord(user);
-			user.save();
-
-
+			user.save().then(function(){
+				subscriber.save();
+			});
+		$('#user_count').text('('+ (count_user) +')'); 
+			// subscriber.get('users').removeObject(user);
+			// subscriber.save().;
+			/*user.destroyRecord();
+			user.save();*/
 	},
 
 	editUser : function(user){
@@ -69,10 +78,10 @@ App.UsersController = Ember.ObjectController.extend({
             $(document).off('click', '#edit_user').on('click', '#edit_user', function(){ 
            
 			var username = $('#name_user').val();
+
 			var subscriber_selected = self.get('controllers.subscriber').findSubscriber($('#subscriber_select').val());
 			var admin_value = $('#admin').prop('checked');
-
-
+			
 			//call the validations ???
 			var bool = validateUserForm();
 			if(bool == false){

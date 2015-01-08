@@ -74,6 +74,9 @@ function toggleForm(){
 
         $('#subscription_data').hide(); 
 
+        $("select").select2({
+        });
+   
         var id= this.id.substr(0,this.id.length - 4);        
           $("#"+id+"-panel").show();
         
@@ -115,9 +118,7 @@ function toggleForm(){
        }  
     });
 }
-
-
-
+/*
 function addingSubscriptions () {
     // body...
     $('table').on('click', 'tr .name', function(){
@@ -134,14 +135,11 @@ function addingSubscriptions () {
     });
    
 }
-
-function fillingForm(){
+*/
+/*function fillingForm(){
 
    $('table').on('click', '.glyphicon.glyphicon-edit', function(){   
-
-
-       console.log("clicked");
-       
+       console.log("clicked");       
         var id= $(this).attr("class").substr(0,$(this).attr("class").length - 25);
         var $row = $(this).closest('tr');
         //$(".save").attr('value', 'Edit');
@@ -151,8 +149,7 @@ function fillingForm(){
         }
         else{
            $("#"+id+"-panel").show();  
-         } 
-       
+         }     
         
 
         if(id == "subscription"){
@@ -197,9 +194,10 @@ function fillingForm(){
 
        
     });
-}
-
+}*/
+/*
 function extendSubscription(){
+    $('table').on('click', '.endDate', function(){
         
         var $row = $(this).closest('tr');
         console.log("CLICKED EXTENSION");
@@ -214,7 +212,7 @@ function extendSubscription(){
                  }
                  var oldDate = $('.endDate',$row).text();
                  var mom = new moment(oldDate,'MM-DD-YYYY');
-                 console.log(mom.format('MM/DD/YYYY')+"Hadd ho gyi ab");
+                 console.log(mom.format('MM/DD/YYYY'));
             if($('input[name=extend]:checked', '#extension_form').val() == "months"){
                    
                         var $added_date = mom.add(days,'months').format('MM/DD/YYYY');
@@ -224,7 +222,8 @@ function extendSubscription(){
                                 $("#myAlert").addClass("in");
                                 return false;
                             }
-                    $('.endDate',$row).text($added_date); 
+                    //$('.endDate',$row).text($added_date);
+
 
             }
             else{
@@ -240,8 +239,8 @@ function extendSubscription(){
 
 
         });
-
-}
+    });
+}*/
 
 $(function() { 
 
@@ -249,37 +248,35 @@ $(function() {
             $("#side_bar").toggle();
     });
 
-
+    $('#subscriber_count').text('('+ (index_subscriber-1) +')');
+    $('#user_count').text('('+ (index_user-1) +')');
+    $('#service_count').text('('+ (index_service-1) +')');
  
 
     /*Subscriber Subscription relationship*/
-    addingSubscriptions();
+    //addingSubscriptions();
 
 
 
     /*Filling form */
-   fillingForm();
+  // fillingForm();
 
 
-   	$( ".datepicker" ).datepicker();
-	$("#date").text(moment().format('MMMM Do YYYY, h:mm:ss a')); 
+   
    
     
     toggleForm();
 
     /*Extending subscription*/
-    extendSubscription();
+   // extendSubscription();
     
-    $('#cssmenu ul li').click(function(){
-        $('#cssmenu ul li').removeClass('active');
-        $(this).addClass('active');
 
        /* $( "#cssmenu ul li" ).each(function( index ) {
           $($(this).children("a").attr('href')).css("display","none");
 });
         $($(this).children("a").attr('href')).css("display","block");
 */
-    });
+    
 
     $(document).on('focusout', 'input', function(){    
     if ($(this).val().length != 0){

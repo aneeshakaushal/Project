@@ -1,5 +1,6 @@
 
 var index_subscriber = 3;
+var count_subscriber = 2;
 var current_subscriber = 1;
 
 App.SubscriberController = Ember.ObjectController.extend({
@@ -26,41 +27,44 @@ App.SubscriberController = Ember.ObjectController.extend({
 
       		// Save the new model
       		subscriber.save();
-
+      		count_subscriber++; 
+      		$('#subscriber_count').text('('+ (count_subscriber) +')'); 
+      		
       		index_subscriber++;
       	
 		},
 
 		deleteSubscriber : function(subscriber){
-			if(subscriber.get('id') != 1){	
-
-				var self = this;
-				var users = subscriber.get('users');
-				
-				users.forEach(function(item, index) {
- 						/*item.set('subscriber',*/
- 							
- 							var sub = self.get('controllers.subscriber').findSubscriber(1);
- 							if(item.get('subscriber').get('id') != 1){
- 								item.set('subscriber',sub);
- 								item.set('name',"Assssssss");
- 								console.log(item.get('subscriber').get('name'));
- 								item.save();
- 							}
- 							
- 					});
-
-				subscriber.deleteRecord();
-				this.store.dematerializeRecord(subscriber);
+			count_subscriber--;
+			var sub = this.get('controllers.subscriber').findSubscriber(1);
+			subscriber.get('users').then(function(users){
+				users.forEach(function(item, index, enumerable){
+				item.set("subscriber",sub);
+				item.save();
 				subscriber.save();
+			});
+			});
+		
+			subscriber.get('subscriptions').then(function(subscriptions){
+				subscriptions.forEach(function(item, index, enumerable){
+				item.set("subscriber",sub);
+				item.save();
+				subscriber.save();
+			});
+			});
 
-
-	}
-},
+			sub.save();			
+			subscriber.deleteRecord();
+			subscriber.save();
+			$('#subscriber_count').text('('+ (count_subscriber) +')'); 
+		},
 
 		editSubscriber : function(subscriber){
 			//filling the form 
-			$('subscriber-panel').show();
+			if(subscriber.get('id')== 1){
+				return;
+			}
+			$('#subscriber-panel').show();
 			$('#name').val(subscriber.get('name')).focus();
 			$("#save").hide();
             $('#edit').show();
@@ -84,7 +88,8 @@ App.SubscriberController = Ember.ObjectController.extend({
 		},
 
 		sendId : function(subscriber){
-			current_subscriber = subscriber.get('id')
+			current_subscriber = subscriber.get('id');
+			console.log("current is " + current_subscriber);
 		}
 		
 	},
@@ -96,6 +101,8 @@ App.SubscriberController = Ember.ObjectController.extend({
 		hello : function(){
 			console.log("Hello")			
 		},
+
+		
 
 
 

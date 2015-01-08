@@ -1,0 +1,53 @@
+<h1>Subscriber {{count_subscriber}}</h1>
+			<div id="subscriber-panel" class="tab-panels">
+				<ul class="nav tabs">  <!-- tabs -->
+					<li id="view_details" class="active"><A HREF="#details" data-toggle="tab">Details</A></li>
+					<li id="view_subscription"><A HREF="#/subscriber" >Subscription </A></li>
+				</ul>
+
+				<div class="tab-content">
+						<div id="details" class="tab-pane fade active in panel">	<!-- panel -->			
+							<div id="subscriber_form">
+								<div class="formcss">					
+								{{input  type="text"  class="box" id="name" placeholder="Subscriber Name :" value=newSubscriber action="createSubscriber"}}</br></br>
+								<input {{action "createSubscriber"}} class="btn2 save" id="save" type="button" value="Save">
+								<input style="display:none" class="btn2 save" id="edit" type="button" value="Edit">							
+								</div>
+							</div>
+						</div>				
+					</br>
+					{{outlet}}
+			    </div>		   
+			</div>
+
+
+
+<span id="subscriber-add" class="glyphicon glyphicon-plus"></span><br>
+<div id="subscriber_table">	
+<table  size=10 class="table table-bordered">				
+<thead>
+	<tr>
+		<th>Name</th>
+		<th>Number of Users</th>
+		<th>Number of Subscriptions</th>
+		<th>Action</th>
+	</tr>
+	
+</thead>
+<tbody id="subscriber_table_body">
+
+	{{#each subscriber in model}}
+	
+		<tr {{action "sendId" subscriber}} >
+		<td id="subname" class="name">{{#link-to 'subscription'}}{{subscriber.name}}</td>{{/link-to}}<td class="userLength">{{subscriber.users.length}}</td><td class="subscriptionList">
+		{{subscriber.subscriptions.length}}</td>		
+		<td class="actions">&nbsp;<span {{action "editSubscriber" subscriber}}class="subscriber glyphicon glyphicon-edit"></span>&nbsp;&nbsp;
+		<span {{action "deleteSubscriber" subscriber}} class="delete_subscriber"><span class="glyphicon glyphicon-trash"></span></span>&nbsp;&nbsp;&nbsp;</td></tr>
+	
+	{{/each}}
+
+	{{outlet}}
+
+</tbody>
+</table>	
+</div>

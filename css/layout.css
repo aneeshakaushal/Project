@@ -279,3 +279,8 @@ background-color: #dad671;
 .fade.in {
   opacity: 1;
 }
+
+.name>a{
+  color :black;
+  font-size: 15px
+};
